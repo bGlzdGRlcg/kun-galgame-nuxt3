@@ -10,7 +10,7 @@ export type UpdateType =
   | 'docs'
   | 'test'
 
-export interface Todo {
+export interface UpdateTodo {
   id: number
   status: number
   type: string

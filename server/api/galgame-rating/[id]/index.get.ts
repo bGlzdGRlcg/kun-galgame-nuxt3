@@ -1,7 +1,10 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getGalgameRatingDetailSchema } from '~/validations/galgame-rating'
 import type { GalgameRatingDetails } from '~/types/api/galgame-rating'
-import type { GalgameSample, GalgameSeries } from '~/types/api/galgame-series'
+import type {
+  GalgameSeriesSample,
+  GalgameSeries
+} from '~/types/api/galgame-series'
 import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
 
 const userSelect = {
@@ -82,7 +85,7 @@ export default defineEventHandler(async (event) => {
   const likedUsers = data.like.map((l) => l.user)
   const isLiked = !!userInfo && likedUsers.some((u) => u.id === userInfo.uid)
 
-  const sampleGalgame: GalgameSample[] =
+  const sampleGalgame: GalgameSeriesSample[] =
     data.galgame.series?.galgame.map((g) => ({
       banner: g.banner,
       name: {

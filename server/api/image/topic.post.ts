@@ -1,13 +1,13 @@
 import sharp from 'sharp'
-import env from '~/server/env/dotenv'
+import env from '~~/server/env/dotenv'
 import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
 import {
   KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY,
   KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT,
   KUN_VISUAL_NOVEL_USER_DAILY_UPLOAD_IMAGE_LIMIT
 } from '~/config/upload'
-import { checkBufferSize } from '~/server/utils/checkBufferSize'
-import prisma from '~/prisma/prisma'
+import { checkBufferSize } from '~~/server/utils/checkBufferSize'
+import prisma from '~~/prisma/prisma'
 
 const compressImage = async (name: string, image: Buffer, uid: number) => {
   const miniImage = await sharp(image)

@@ -1,6 +1,6 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getGalgameRankingSchema } from '~/validations/ranking'
-import type { GalgameRankingItem } from '~/types/api/ranking'
+import type { RankingGalgameItem } from '~/types/api/ranking'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameRankingSchema)
@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
     select: select
   })
 
-  const items: GalgameRankingItem[] = galgames.map((game) => {
+  const items: RankingGalgameItem[] = galgames.map((game) => {
     let value: number
     if (sortField === 'view') {
       value = game.view

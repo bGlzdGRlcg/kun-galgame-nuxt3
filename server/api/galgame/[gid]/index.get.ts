@@ -1,7 +1,10 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getGalgameDetailSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
+import type {
+  GalgameSeries,
+  GalgameSeriesSample
+} from '~/types/api/galgame-series'
 import type { KunGalgameTagCategory } from '~/constants/galgameTag'
 import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
 
@@ -140,7 +143,7 @@ export default defineEventHandler(async (event) => {
       markdownToHtml(galgame.intro_zh_tw)
     ])
 
-  const sampleGalgame: GalgameSample[] = galgame.series
+  const sampleGalgame: GalgameSeriesSample[] = galgame.series
     ? galgame.series.galgame.map((g) => ({
         banner: g.banner,
         name: {

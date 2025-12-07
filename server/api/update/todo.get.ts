@@ -1,6 +1,6 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getTodoSchema } from '~/validations/todo'
-import type { Todo } from '~/types/api/update-log'
+import type { UpdateTodo } from '~/types/api/update-log'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getTodoSchema)
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     orderBy: { created: 'desc' }
   })
 
-  const todos: Todo[] = data.map((todo) => ({
+  const todos: UpdateTodo[] = data.map((todo) => ({
     id: todo.id,
     status: todo.status,
     type: todo.type,

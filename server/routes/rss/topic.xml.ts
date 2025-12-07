@@ -1,11 +1,11 @@
 import { useKunFeed } from '../_useI18nFeed'
-import type { TopicRSS } from '~/types/api/rss'
+import type { RSSTopic } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const baseUrl = useRuntimeConfig().public.KUN_GALGAME_URL
   const feed = useKunFeed(baseUrl, 'topic')
 
-  const topics = await $fetch<TopicRSS[]>(`/api/rss/topic`, { method: 'GET' })
+  const topics = await $fetch<RSSTopic[]>(`/api/rss/topic`, { method: 'GET' })
 
   for (const topic of topics) {
     feed.addItem({

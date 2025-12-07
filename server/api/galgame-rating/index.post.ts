@@ -1,6 +1,6 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { createGalgameRatingSchema } from '~/validations/galgame-rating'
-import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
+import type { GalgameRatingCardOnGalgamePage } from '~/types/api/galgame-rating'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePostBody(event, createGalgameRatingSchema)
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
       data: { moemoepoint: { increment: moemoepointIncrement } }
     })
 
-    const newRating: GalgamePageRatingCard = {
+    const newRating: GalgameRatingCardOnGalgamePage = {
       ...res,
       galgame: {
         id: res.galgame_id,

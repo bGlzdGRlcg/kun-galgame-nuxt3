@@ -4,7 +4,7 @@ import { abortToolsetUploadSchema } from '~/validations/toolset'
 import {
   getUploadCache,
   removeUploadCache
-} from '~/server/utils/upload/saveUploadSalt'
+} from '~~/server/utils/upload/saveUploadSalt'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

@@ -1,6 +1,6 @@
 import type { GalgameCard } from './galgame.d.ts'
 
-export interface GalgameSample {
+export interface GalgameSeriesSample {
   name: KunLanguage
   banner: string
 }
@@ -21,7 +21,7 @@ export interface GalgameSeriesDetail extends GalgameSeries {
   galgame: GalgameCard[]
 }
 
-export interface GalgameSearchSearchItem {
+export interface GalgameSeriesSearchItem {
   id: number
   name: string
 }

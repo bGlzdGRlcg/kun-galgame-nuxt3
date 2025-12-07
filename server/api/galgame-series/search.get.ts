@@ -1,7 +1,7 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getSearchResultSchema } from '~/validations/galgame-series'
 import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
-import type { GalgameSearchSearchItem } from '~/types/api/galgame-series'
+import type { GalgameSeriesSearchItem } from '~/types/api/galgame-series'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getSearchResultSchema)
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
     take: 20
   })
 
-  const formattedResult: GalgameSearchSearchItem[] = galgames.map((g) => ({
+  const formattedResult: GalgameSeriesSearchItem[] = galgames.map((g) => ({
     id: g.id,
     name: getPreferredLanguageText({
       'en-us': g.name_en_us,

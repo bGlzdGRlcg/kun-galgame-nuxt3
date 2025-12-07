@@ -48,14 +48,6 @@ export interface WebsiteCard {
   category: string
 }
 
-export interface PreloadWebsiteComment {
-  id: number
-  content: string
-  user: KunUser
-  created: Date | string
-  updated: Date | string
-}
-
 export interface WebsiteDetail {
   id: number
   name: string
@@ -73,7 +65,13 @@ export interface WebsiteDetail {
   isFavorited: boolean
   domain: string[]
   createTime: string
-  comment: PreloadWebsiteComment[]
+  comment: {
+    id: number
+    content: string
+    user: KunUser
+    created: Date | string
+    updated: Date | string
+  }[]
 
   created: Date | string
   updated: Date | string

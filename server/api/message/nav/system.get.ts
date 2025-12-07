@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import type { AsideItem } from '~/types/api/chat-message'
+import prisma from '~~/prisma/prisma'
+import type { ChatMessageAsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
     })
   ])
 
-  const responseData: AsideItem[] = [
+  const responseData: ChatMessageAsideItem[] = [
     {
       chatroomName: '',
       content: latestMessage ? latestMessage.content.slice(0, 100) : '',

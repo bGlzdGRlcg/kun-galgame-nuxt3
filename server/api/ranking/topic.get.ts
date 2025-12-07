@@ -1,7 +1,7 @@
-import prisma from '~/prisma/prisma'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import prisma from '~~/prisma/prisma'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 import { getTopicRankingSchema } from '~/validations/ranking'
-import type { TopicRankingItem } from '~/types/api/ranking'
+import type { RankingTopicItem } from '~/types/api/ranking'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getTopicRankingSchema)
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     select: select
   })
 
-  const items: TopicRankingItem[] = topics.map((topic) => {
+  const items: RankingTopicItem[] = topics.map((topic) => {
     let value: number
     if (sortField === 'view') {
       value = topic.view

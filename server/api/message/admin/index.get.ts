@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import type { SystemMessage } from '~/types/api/message'
+import prisma from '~~/prisma/prisma'
+import type { MessageSystemMessage } from '~/types/api/message'
 
 export default defineEventHandler(async (_) => {
   const data = await prisma.system_message.findMany({
@@ -15,7 +15,7 @@ export default defineEventHandler(async (_) => {
     }
   })
 
-  const messages: SystemMessage[] = data.map((message) => ({
+  const messages: MessageSystemMessage[] = data.map((message) => ({
     id: message.id,
     status: message.status as 'read' | 'unread',
     content: {

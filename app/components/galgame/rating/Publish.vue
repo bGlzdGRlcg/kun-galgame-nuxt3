@@ -15,7 +15,7 @@ import {
   updateGalgameRatingSchema
 } from '~/validations/galgame-rating'
 import { usePersistEditGalgameRatingStore } from '~/store/modules/edit/rating'
-import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
+import type { GalgameRatingCardOnGalgamePage } from '~/types/api/galgame-rating'
 
 type RatingInitialData = {
   galgameRatingId: number
@@ -44,7 +44,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   'update:modalValue': [value: boolean]
   onUpdated: []
-  onPublished: [GalgamePageRatingCard]
+  onPublished: [GalgameRatingCardOnGalgamePage]
 }>()
 
 const { shortSummary: shortSummaryStore } = storeToRefs(

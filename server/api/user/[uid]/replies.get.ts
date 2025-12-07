@@ -1,4 +1,4 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getUserReplySchema } from '~/validations/user'
 import type { Prisma } from '@prisma/client'
 import type { UserReply } from '~/types/api/user'

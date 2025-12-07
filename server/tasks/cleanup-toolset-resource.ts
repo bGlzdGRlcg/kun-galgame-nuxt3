@@ -3,7 +3,7 @@ import { s3 } from '~/lib/s3/client'
 import {
   removeUploadCache,
   type UploadSaltCache
-} from '~/server/utils/upload/saveUploadSalt'
+} from '~~/server/utils/upload/saveUploadSalt'
 
 export default defineTask({
   meta: {

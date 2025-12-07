@@ -1,6 +1,6 @@
-import { activityFetchers } from '~/server/utils/activityFetchers'
+import { activityFetchers } from '~~/server/utils/activityFetchers'
 import { getActivitySchema } from '~/validations/activity'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getActivitySchema)

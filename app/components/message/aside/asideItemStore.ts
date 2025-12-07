@@ -1,6 +1,9 @@
-import type { AsideItem, ChatMessage } from '~/types/api/chat-message'
+import type {
+  ChatMessageAsideItem,
+  ChatMessage
+} from '~/types/api/chat-message'
 
-export const asideItems = ref<AsideItem[]>([])
+export const asideItems = ref<ChatMessageAsideItem[]>([])
 
 export const replaceAsideItem = (message: ChatMessage) => {
   const targetIndex = asideItems.value.findIndex(

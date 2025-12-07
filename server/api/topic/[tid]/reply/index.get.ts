@@ -1,6 +1,6 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getReplySchema } from '~/validations/topic'
-import { markdownToText } from '~/utils/markdownToText'
+import { markdownToText } from '~~/server/utils/markdownToText'
 import { Prisma } from '@prisma/client'
 import type { z } from 'zod'
 import type { TopicReply } from '~/types/api/topic-reply'

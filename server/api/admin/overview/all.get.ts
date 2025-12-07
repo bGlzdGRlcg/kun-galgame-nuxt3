@@ -1,4 +1,4 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import {
   KUN_ADMIN_OVERVIEW_STATS_MODEL_ITEM,
   KUN_ADMIN_OVERVIEW_STATS_MODEL_MAP

@@ -1,12 +1,12 @@
-import prisma from '~/prisma/prisma'
-import env from '~/server/env/dotenv'
+import prisma from '~~/prisma/prisma'
+import env from '~~/server/env/dotenv'
 import sharp from 'sharp'
 import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
 import {
   KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY,
   KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT
 } from '~/config/upload'
-import { checkBufferSize } from '~/server/utils/checkBufferSize'
+import { checkBufferSize } from '~~/server/utils/checkBufferSize'
 
 const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
   const miniAvatar = await sharp(avatar)

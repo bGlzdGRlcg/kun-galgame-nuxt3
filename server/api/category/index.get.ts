@@ -1,7 +1,10 @@
-import prisma from '~/prisma/prisma'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import prisma from '~~/prisma/prisma'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 import { getTopicCategoryStats } from '~/validations/category'
-import type { LatestTopicInfo, SectionStats } from '~/types/api/category'
+import type {
+  CategoryLatestTopicInfo,
+  CategorySectionStats
+} from '~/types/api/category'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getTopicCategoryStats)
@@ -40,7 +43,7 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  const statsMap = new Map<number, SectionStats>()
+  const statsMap = new Map<number, CategorySectionStats>()
 
   for (const topic of topics) {
     for (const relation of topic.section) {
@@ -67,7 +70,7 @@ export default defineEventHandler(async (event) => {
           id: topic.id,
           title: topic.title,
           created: topic.created
-        } satisfies LatestTopicInfo
+        } satisfies CategoryLatestTopicInfo
       }
     }
   }

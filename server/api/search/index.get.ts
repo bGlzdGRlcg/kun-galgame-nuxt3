@@ -6,7 +6,7 @@ import {
   searchUser
 } from './_search'
 import { getSearchResultSchema } from '~/validations/search'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 import type { z } from 'zod'
 
 const search = async (

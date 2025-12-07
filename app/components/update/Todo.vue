@@ -3,7 +3,7 @@ import {
   KUN_TODO_TYPE_MAP,
   KUN_UPDATE_LOG_STATUS_MAP
 } from '~/constants/update'
-import type { Todo } from '~/types/api/update-log'
+import type { UpdateTodo } from '~/types/api/update-log'
 import type { UpdateTodoPayload } from './types'
 
 const { role } = usePersistUserStore()
@@ -37,7 +37,7 @@ const { data, status, refresh } = await useFetch(`/api/update/todo`, {
 const showTodoModal = ref(false)
 const editingTodo = ref<UpdateTodoPayload>({} as UpdateTodoPayload)
 
-const openEditTodoModal = (log: Todo) => {
+const openEditTodoModal = (log: UpdateTodo) => {
   if (!data.value) {
     return
   }

@@ -1,5 +1,5 @@
 import type { ActivityItem, ActivityEventType } from '~/types/api/activity'
-import { activityFetchers } from '~/server/utils/activityFetchers'
+import { activityFetchers } from '~~/server/utils/activityFetchers'
 
 export interface ActivityTimelineOptions {
   page: number

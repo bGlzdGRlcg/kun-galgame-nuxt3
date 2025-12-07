@@ -1,4 +1,4 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getUserGalgameSchema } from '~/validations/user'
 import type { GalgameCard } from '~/types/api/galgame'
 import type { Prisma } from '@prisma/client'

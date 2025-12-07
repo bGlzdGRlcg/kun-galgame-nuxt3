@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import type { AsideItem } from '~/types/api/chat-message'
+import prisma from '~~/prisma/prisma'
+import type { ChatMessageAsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
     return []
   }
 
-  const asideItems: AsideItem[] = chatRooms.map((room) => {
+  const asideItems: ChatMessageAsideItem[] = chatRooms.map((room) => {
     let title = room.name
     let avatar = room.avatar
     let route = room.name

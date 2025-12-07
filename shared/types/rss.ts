@@ -1,4 +1,4 @@
-export interface GalgameRSS {
+export interface RSSGalgame {
   id: number
   name: string
   banner: string
@@ -8,7 +8,7 @@ export interface GalgameRSS {
   description: string
 }
 
-export interface TopicRSS {
+export interface RSSTopic {
   id: number
   name: string
   user: KunUser

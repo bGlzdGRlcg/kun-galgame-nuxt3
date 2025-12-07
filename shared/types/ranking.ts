@@ -1,4 +1,4 @@
-export interface UserRankingItem {
+export interface RankingUserItem {
   id: number
   name: string
   avatar: string
@@ -7,7 +7,7 @@ export interface UserRankingItem {
   value: number
 }
 
-export interface TopicRankingItem {
+export interface RankingTopicItem {
   id: number
   title: string
   user: KunUser
@@ -15,7 +15,7 @@ export interface TopicRankingItem {
   value: number
 }
 
-export interface GalgameRankingItem {
+export interface RankingGalgameItem {
   id: number
   name: KunLanguage
   user: KunUser

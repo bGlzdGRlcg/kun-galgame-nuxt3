@@ -1,6 +1,6 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getUserRankingSchema } from '~/validations/ranking'
-import type { UserRankingItem } from '~/types/api/ranking'
+import type { RankingUserItem } from '~/types/api/ranking'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getUserRankingSchema)
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     select: select
   })
 
-  const items: UserRankingItem[] = users.map((user) => {
+  const items: RankingUserItem[] = users.map((user) => {
     let value: number
     if (sortField === 'moemoepoint') {
       value = user.moemoepoint

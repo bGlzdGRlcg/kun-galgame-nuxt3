@@ -1,5 +1,4 @@
 import type { GalgameCard } from '~/types/api/galgame'
-import type { UserStore } from '~/store/types/user'
 
 export interface UserInfo {
   id: number
@@ -100,5 +99,3 @@ export type UserUpdateAvatarResponseData = {
 export type UserGetUserEmailResponseData = {
   email: string
 }
-
-export type LoginResponseData = UserStore

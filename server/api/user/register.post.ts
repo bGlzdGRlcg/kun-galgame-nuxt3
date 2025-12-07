@@ -1,7 +1,7 @@
 import { hash } from 'bcrypt'
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { userRegisterSchema } from '~/validations/user'
-import type { LoginResponseData } from '~/types/api/user'
+import type { AuthLoginResponseData } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePostBody(event, userRegisterSchema)
@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
     maxAge: 30 * 24 * 60 * 60 * 1000
   })
 
-  const userInfo: LoginResponseData = {
+  const userInfo: AuthLoginResponseData = {
     id: user.id,
     name: user.name,
     avatar: user.avatar,

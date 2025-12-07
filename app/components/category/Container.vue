@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { KUN_TOPIC_SECTION } from '~/constants/topic'
-import type { SectionStats } from '~/types/api/category'
+import type { CategorySectionStats } from '~/types/api/category'
 
 defineProps<{
-  sections: SectionStats[]
+  sections: CategorySectionStats[]
   categoryName: string
 }>()
 </script>

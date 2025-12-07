@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { SystemMessage } from '~/types/api/message'
+import type { MessageSystemMessage } from '~/types/api/message'
 
 defineProps<{
-  message: SystemMessage
+  message: MessageSystemMessage
 }>()
 </script>
 

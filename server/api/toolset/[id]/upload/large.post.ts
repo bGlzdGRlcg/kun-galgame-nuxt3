@@ -1,11 +1,11 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { s3 } from '~/lib/s3/client'
 import {
   CreateMultipartUploadCommand,
   UploadPartCommand
 } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { generateRandomCode } from '~/server/utils/generateRandomCode'
+import { generateRandomCode } from '~~/server/utils/generateRandomCode'
 import {
   LARGE_FILE_CHUNK_SIZE,
   MAX_SMALL_FILE_SIZE,
@@ -13,9 +13,9 @@ import {
   KUN_VISUAL_NOVEL_UPLOAD_TIMEOUT_LIMIT
 } from '~/config/upload'
 import { initToolsetUploadSchema } from '~/validations/toolset'
-import { parseFileName } from '~/server/utils/upload/parseFileName'
-import { saveUploadSalt } from '~/server/utils/upload/saveUploadSalt'
-import { canUserUpload } from '~/server/utils/upload/canUserUpload'
+import { parseFileName } from '~~/server/utils/upload/parseFileName'
+import { saveUploadSalt } from '~~/server/utils/upload/saveUploadSalt'
+import { canUserUpload } from '~~/server/utils/upload/canUserUpload'
 import type { ToolsetLargeFileUploadResponse } from '~/types/api/toolset'
 
 const MB = 1024 * 1024

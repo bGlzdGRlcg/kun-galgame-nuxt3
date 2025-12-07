@@ -1,7 +1,7 @@
 import type { GalgameOfficialItem } from './galgame-official'
 import type { GalgameSeries } from './galgame-series'
 
-export interface GalgameInfoForRating {
+export interface GalgameRatingGalgameInfo {
   id: number
   name: KunLanguage
   contentLimit: string
@@ -12,12 +12,6 @@ export interface GalgameInfoForRating {
   // rating overall average
   rating: number
   ratingCount: number
-}
-
-export interface GalgameBasicForRatingCard {
-  id: number
-  name: KunLanguage
-  contentLimit: string
 }
 
 export interface GalgameRatingCard {
@@ -43,7 +37,11 @@ export interface GalgameRatingCard {
   created: Date | string
   updated: Date | string
 
-  galgame: GalgameBasicForRatingCard
+  galgame: {
+    id: number
+    name: KunLanguage
+    contentLimit: string
+  }
 }
 
 export interface GalgameRatingComment {
@@ -62,11 +60,11 @@ export interface GalgameRatingDetails extends GalgameRatingCard {
   isLiked: boolean
   likedUsers: KunUser[]
   comments: GalgameRatingComment[]
-  galgame: GalgameInfoForRating
+  galgame: GalgameRatingGalgameInfo
   galgameSeries: GalgameSeries | null
 }
 
-export interface GalgamePageRatingCard extends GalgameRatingCard {
+export interface GalgameRatingCardOnGalgamePage extends GalgameRatingCard {
   short_summary: string
   isLiked: boolean
 }

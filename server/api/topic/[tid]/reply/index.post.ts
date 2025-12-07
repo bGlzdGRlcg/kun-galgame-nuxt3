@@ -1,7 +1,7 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { createReplySchema } from '~/validations/topic'
-import { markdownToText } from '~/utils/markdownToText'
-import { createMessage } from '~/server/utils/message'
+import { markdownToText } from '~~/server/utils/markdownToText'
+import { createMessage } from '~~/server/utils/message'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 export default defineEventHandler(async (event) => {

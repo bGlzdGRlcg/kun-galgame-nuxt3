@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import type { TopicRSS } from '~/types/api/rss'
+import prisma from '~~/prisma/prisma'
+import type { RSSTopic } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const data = await prisma.topic.findMany({
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  const topics: TopicRSS[] = data.map((topic) => ({
+  const topics: RSSTopic[] = data.map((topic) => ({
     id: topic.id,
     name: topic.title,
     user: topic.user,

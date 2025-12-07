@@ -11,14 +11,14 @@ import {
 } from '~/constants/galgame'
 import { updateGalgameBannerSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
+import type { GalgameRatingCardOnGalgamePage } from '~/types/api/galgame-rating'
 
 const props = defineProps<{
   galgame: GalgameDetail
 }>()
 
 const emits = defineEmits<{
-  onRatingCreated: [GalgamePageRatingCard]
+  onRatingCreated: [GalgameRatingCardOnGalgamePage]
 }>()
 
 const { id, role } = usePersistUserStore()

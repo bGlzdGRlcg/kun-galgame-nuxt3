@@ -1,6 +1,6 @@
-import { getActivityTimelineData } from '~/server/utils/activityTimeline'
+import { getActivityTimelineData } from '~~/server/utils/activityTimeline'
 import { getActivityTimelineSchema } from '~/validations/activity'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getActivityTimelineSchema)

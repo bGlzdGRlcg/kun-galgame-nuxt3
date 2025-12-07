@@ -1,6 +1,6 @@
 import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
-import prisma from '~/prisma/prisma'
-import type { GalgameRSS } from '~/types/api/rss'
+import prisma from '~~/prisma/prisma'
+import type { RSSGalgame } from '~/types/api/rss'
 
 export default defineEventHandler(async () => {
   const data = await prisma.galgame.findMany({
@@ -19,7 +19,7 @@ export default defineEventHandler(async () => {
     }
   })
 
-  const galgames: GalgameRSS[] = data.map((galgame) => ({
+  const galgames: RSSGalgame[] = data.map((galgame) => ({
     id: galgame.id,
     name: getPreferredLanguageText({
       'en-us': galgame.name_en_us,

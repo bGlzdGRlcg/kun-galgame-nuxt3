@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import { markdownToText } from '~/utils/markdownToText'
+import prisma from '~~/prisma/prisma'
+import { markdownToText } from '~~/server/utils/markdownToText'
 import { updateTopicUpvoteSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {

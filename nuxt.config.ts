@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     scanPageMeta: true
   },
 
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-07-15',
 
   devServer: {
     host: '127.0.0.1',

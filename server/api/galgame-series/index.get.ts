@@ -1,6 +1,9 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { getGalgameSeriesSchema } from '~/validations/galgame-series'
-import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
+import type {
+  GalgameSeries,
+  GalgameSeriesSample
+} from '~/types/api/galgame-series'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameSeriesSchema)
@@ -75,7 +78,7 @@ export default defineEventHandler(async (event) => {
   const series: GalgameSeries[] = data.map((s) => {
     const isNSFW = s.galgame.some((g) => g.content_limit === 'nsfw')
 
-    const sampleGalgame: GalgameSample[] = s.galgame.map((g) => ({
+    const sampleGalgame: GalgameSeriesSample[] = s.galgame.map((g) => ({
       banner: g.banner,
       name: {
         'en-us': g.name_en_us,

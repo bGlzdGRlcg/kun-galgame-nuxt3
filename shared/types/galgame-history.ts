@@ -6,7 +6,7 @@ export type GalgameHistoryAction =
   | 'declined'
 export type GalgameHistoryType = 'galgame' | 'banner' | 'link' | 'pr'
 
-export interface CreateGalgameHistoryRequestData {
+export interface GalgameHistoryCreateRequestData {
   galgame_id: number
   user_id: number
   action: GalgameHistoryAction

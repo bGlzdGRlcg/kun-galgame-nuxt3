@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
+import type { GalgameRatingCardOnGalgamePage } from '~/types/api/galgame-rating'
 
 const props = defineProps<{
   galgame: GalgameDetail
@@ -17,7 +17,7 @@ const sortedRatings = computed(() => {
   )
 })
 
-const handleRatingCreated = (newRating: GalgamePageRatingCard) => {
+const handleRatingCreated = (newRating: GalgameRatingCardOnGalgamePage) => {
   ratings.value.unshift(newRating)
 }
 </script>

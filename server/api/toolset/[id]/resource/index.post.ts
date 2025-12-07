@@ -1,9 +1,9 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { createToolsetResourceSchema } from '~/validations/toolset'
 import {
   getUploadCache,
   removeUploadCache
-} from '~/server/utils/upload/saveUploadSalt'
+} from '~~/server/utils/upload/saveUploadSalt'
 import { isValidArchive } from '~/utils/validate'
 import type { ToolsetResource } from '~/types/api/toolset'
 

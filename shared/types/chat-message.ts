@@ -1,10 +1,10 @@
-export interface MessageHistoryRequest {
+export interface ChatMessageHistoryRequest {
   receiverUid: string
   page: string
   limit: string
 }
 
-export interface AsideItem {
+export interface ChatMessageAsideItem {
   chatroomName: string
   content: string
   count: number

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
-import type { GalgameSearchSearchItem } from '~/types/api/galgame-series'
+import type { GalgameSeriesSearchItem } from '~/types/api/galgame-series'
 
 const props = defineProps<{
   modelValue: number[]
@@ -13,8 +13,8 @@ const emits = defineEmits<{
 }>()
 
 const searchTerm = ref('')
-const searchResults = ref<GalgameSearchSearchItem[]>([])
-const selectedGalgames = ref<GalgameSearchSearchItem[]>([])
+const searchResults = ref<GalgameSeriesSearchItem[]>([])
+const selectedGalgames = ref<GalgameSeriesSearchItem[]>([])
 const isLoading = ref(false)
 const isDropdownOpen = ref(false)
 const wrapperRef = ref<HTMLElement | null>(null)
@@ -44,7 +44,7 @@ const handleSearch = useDebounceFn(async () => {
   isLoading.value = false
 }, 300)
 
-const selectGame = (game: GalgameSearchSearchItem) => {
+const selectGame = (game: GalgameSeriesSearchItem) => {
   selectedGalgames.value.push(game)
   internalIds.value = [...internalIds.value, game.id]
 

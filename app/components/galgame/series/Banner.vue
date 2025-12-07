@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { GalgameSample } from '~/types/api/galgame-series'
+import type { GalgameSeriesSample } from '~/types/api/galgame-series'
 
 const props = defineProps<{
   isNSFW: boolean
-  galgames: GalgameSample[]
+  galgames: GalgameSeriesSample[]
 }>()
 
 const banners = computed(() => props.galgames.map((g) => g.banner).slice(0, 5))

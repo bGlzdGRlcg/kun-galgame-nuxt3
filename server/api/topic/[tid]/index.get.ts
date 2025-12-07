@@ -1,5 +1,5 @@
-import prisma from '~/prisma/prisma'
-import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
+import prisma from '~~/prisma/prisma'
+import { getNSFWCookie } from '~~/server/utils/getNSFWCookie'
 import { getTopicDetailSchema } from '~/validations/topic'
 import type { TopicDetail, TopicBestAnswer } from '~/types/api/topic'
 

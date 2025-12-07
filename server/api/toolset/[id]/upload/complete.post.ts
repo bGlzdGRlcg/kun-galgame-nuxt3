@@ -1,4 +1,4 @@
-import prisma from '~/prisma/prisma'
+import prisma from '~~/prisma/prisma'
 import { s3 } from '~/lib/s3/client'
 import {
   CompleteMultipartUploadCommand,
@@ -9,8 +9,8 @@ import { completeToolsetUploadSchema } from '~/validations/toolset'
 import {
   getUploadCache,
   removeUploadCache
-} from '~/server/utils/upload/saveUploadSalt'
-import { canUserUpload } from '~/server/utils/upload/canUserUpload'
+} from '~~/server/utils/upload/saveUploadSalt'
+import { canUserUpload } from '~~/server/utils/upload/canUserUpload'
 import type { ToolsetUploadCompleteResponse } from '~/types/api/toolset'
 
 export default defineEventHandler(async (event) => {

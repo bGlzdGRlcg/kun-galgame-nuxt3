@@ -15,7 +15,7 @@ export type MessageType =
 
 export type MessageStatus = 'read' | 'unread'
 
-export type SortField = 'time'
+export type MessageSortField = 'time'
 
 export interface MessageRequestData {
   page: string
@@ -36,7 +36,7 @@ export interface Message {
   created: Date | string
 }
 
-export interface SystemMessage {
+export interface MessageSystemMessage {
   id: number
   status: MessageStatus
   content: KunNullable<KunLanguage>
