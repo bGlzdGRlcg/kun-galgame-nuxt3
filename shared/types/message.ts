@@ -13,15 +13,11 @@ export type MessageType =
   | 'mentioned'
   | 'admin'
 
-export type MessageStatus = 'read' | 'unread'
-
-export type MessageSortField = 'time'
-
 export interface MessageRequestData {
   page: string
   limit: string
   type?: MessageType | ''
-  sortField?: SortField
+  sortField?: 'time'
   sortOrder: KunOrder
 }
 
@@ -31,7 +27,7 @@ export interface Message {
   receiverUid: number
   link: string
   content: string
-  status: MessageStatus
+  status: 'read' | 'unread'
   type: MessageType
   created: Date | string
 }

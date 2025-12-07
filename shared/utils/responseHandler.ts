@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import type { FetchContext, FetchResponse } from 'ofetch'
+import type { FetchResponse } from 'ofetch'
 
 interface KunErrorData {
   data?: {
@@ -19,16 +19,16 @@ interface ResponseMap {
 }
 type ResponseType = keyof ResponseMap | 'json'
 
-type KunOnResponseContext = FetchContext<unknown, ResponseType> & {
-  response: FetchResponse<ResponseType>
-}
-type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
-  FetchContext & {
-    response: FetchResponse<R>
-  }
+type KunOnResponseContext<
+  R extends ResponseType,
+  JsonType = unknown
+> = R extends keyof ResponseMap ? ResponseMap[R] : JsonType
 
-export const onResponse = async (context: KunOnResponseContext) => {
-  const errorData = context.response?._data as KunErrorData | undefined
+export const onResponse = async <R extends ResponseType>(
+  context: KunOnResponseContext<R>
+) => {
+  const { response } = context as { response: FetchResponse<ResponseType> }
+  const errorData = response?._data as KunErrorData | undefined
 
   if (!errorData) {
     useMessage('网络请求失败，请稍后重试', 'error')
@@ -63,6 +63,4 @@ export const onResponse = async (context: KunOnResponseContext) => {
   }
 }
 
-const onResponseError = async (context: KunOnResponseErrorContext) => {}
-
-export const kungalgameResponseHandler = { onResponse, onResponseError }
+export const kungalgameResponseHandler = { onResponse }

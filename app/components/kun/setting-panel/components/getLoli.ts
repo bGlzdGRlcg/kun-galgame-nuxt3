@@ -1,5 +1,4 @@
-import loliData from '~/public/ren.json'
-import { randomNum } from '~/utils/random'
+import loliData from '~~/public/ren.json'
 
 export const getLoli = async () => {
   const getAssetsFile = (name: number) => `/ren/${name}.webp`
@@ -11,11 +10,11 @@ export const getLoli = async () => {
   const randomSkirt = randomNum(63, 70)
 
   const loli = {
-    lass: loliData[randomSkirt],
-    eye: loliData[randomEye],
-    brow: loliData[randomBrow],
-    mouth: loliData[randomMouth],
-    face: loliData[randomFace]
+    lass: loliData[randomSkirt]!,
+    eye: loliData[randomEye]!,
+    brow: loliData[randomBrow]!,
+    mouth: loliData[randomMouth]!,
+    face: loliData[randomFace]!
   }
 
   const loliBodyLeft = `${loli.lass.left}px`

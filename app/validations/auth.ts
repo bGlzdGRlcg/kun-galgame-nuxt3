@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { isValidName, isValidPassword } from '~/utils/validate'
 
 export const createSendForgotPasswordVerificationCodeSchema = z.object({
   email: z.string().email({ message: '非法的邮箱格式' })

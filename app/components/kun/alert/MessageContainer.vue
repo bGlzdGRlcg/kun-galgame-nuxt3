@@ -2,15 +2,15 @@
 import { computed } from 'vue'
 import {
   useMessageState,
-  type MessagePosition,
-  type MessageOptions
+  type KunMessagePosition,
+  type KunMessageOptions
 } from '~/composables/useMessage'
 import MessageItem from './MessageItem.vue'
 
 const { messages, removeMessage } = useMessageState()
 
 const positionedMessages = computed(() => {
-  const groups: Record<MessagePosition, MessageOptions[]> = {
+  const groups: Record<MessagePosition, KunMessageOptions[]> = {
     'top-left': [],
     'top-center': [],
     'top-right': [],
@@ -19,12 +19,12 @@ const positionedMessages = computed(() => {
     'bottom-right': []
   }
   messages.value.forEach((msg) => {
-    if (groups[msg.position]) groups[msg.position].push(msg)
+    if (groups[msg.position]) groups[msg.position]!.push(msg)
   })
   return groups
 })
 
-const positionClasses: Record<MessagePosition, string> = {
+const positionClasses: Record<KunMessagePosition, string> = {
   'top-center': 'top-4 left-1/2 -translate-x-1/2 items-center',
   'top-left': 'top-4 left-4 items-start',
   'top-right': 'top-4 right-4 items-end',

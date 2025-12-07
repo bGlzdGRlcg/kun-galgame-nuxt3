@@ -1,9 +1,9 @@
-import { ref, render, h, computed, type Ref } from 'vue'
+import { render } from 'vue'
 import MessageContainer from '~/components/kun/alert/MessageContainer.vue'
 import { infoMessages } from '~/error/kunMessage'
 
-export type MessageType = 'warn' | 'success' | 'error' | 'info'
-export type MessagePosition =
+export type KunMessageType = 'warn' | 'success' | 'error' | 'info'
+export type KunMessagePosition =
   | 'top-center'
   | 'top-left'
   | 'top-right'
@@ -11,7 +11,7 @@ export type MessagePosition =
   | 'bottom-left'
   | 'bottom-right'
 
-export interface MessageOptions {
+export interface KunMessageOptions {
   id: string
   message: string
   type: MessageType

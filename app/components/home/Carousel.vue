@@ -46,7 +46,12 @@ const stopAutoplay = () => {
 
 const startDrag = (e: MouseEvent | TouchEvent) => {
   isDragging.value = true
-  dragStart.value = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX
+  dragStart.value =
+    e instanceof MouseEvent
+      ? e.clientX
+      : e.touches[0]
+        ? e.touches[0].clientX
+        : 0
   stopAutoplay()
 }
 
@@ -54,7 +59,12 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
   if (!isDragging.value) return
 
   e.preventDefault()
-  const currentX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX
+  const currentX =
+    e instanceof MouseEvent
+      ? e.clientX
+      : e.touches[0]
+        ? e.touches[0].clientX
+        : 0
   const diff = currentX - dragStart.value
   const containerWidth = carouselRef.value?.offsetWidth || 0
   dragOffset.value = (diff / containerWidth) * 100

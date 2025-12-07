@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { ResourceSizePattern } from '~/utils/pattern'
 import {
   KUN_TOOLSET_TYPE_CONST,
   KUN_TOOLSET_LANGUAGE_CONST,

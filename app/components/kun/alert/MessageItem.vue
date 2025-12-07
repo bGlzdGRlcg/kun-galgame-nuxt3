@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
-import type { MessageType } from '~/composables/useMessage'
+import type { KunMessageType } from '~/composables/useMessage'
 
 const props = defineProps<{
   id: string
   message: string
-  type: MessageType
+  type: KunMessageType
   duration: number
   richText?: boolean
   count: number

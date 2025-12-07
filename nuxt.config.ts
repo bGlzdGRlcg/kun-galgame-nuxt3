@@ -189,6 +189,9 @@ export default defineNuxtConfig({
       websocket: true,
       tasks: true
     },
+    rollupConfig: {
+      external: [/^@prisma\//, /\.wasm$/]
+    },
     scheduledTasks: {
       '0 0 * * *': ['reset-daily'],
       '0 * * * *': ['cleanup-toolset-resource']

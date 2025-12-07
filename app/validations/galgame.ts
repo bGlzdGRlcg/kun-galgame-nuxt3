@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { VNDBPattern, ResourceSizePattern } from '~/utils/pattern'
 import {
   KUN_RESOURCE_TYPE_CONST,
   KUN_RESOURCE_LANGUAGE_CONST,
