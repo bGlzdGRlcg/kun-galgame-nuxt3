@@ -20,9 +20,9 @@ const registerForm = reactive<Record<string, string>>({
 
 const handleSendCode = () => {
   const result = checkForm(
-    registerForm.name,
-    registerForm.email,
-    registerForm.password
+    registerForm.name!,
+    registerForm.email!,
+    registerForm.password!
   )
   if (!result) {
     return
@@ -41,7 +41,7 @@ const handleSendCode = () => {
 }
 
 const handleRegister = async () => {
-  if (!checkRegister(isSendCode.value, registerForm.code)) {
+  if (!checkRegister(isSendCode.value, registerForm.code!)) {
     return
   }
 
@@ -106,7 +106,7 @@ onKeyStroke('Enter', async (e) => {
           @click="handleSendCode"
           class-name="absolute right-9 bottom-61.5"
           :name="registerForm.name"
-          :email="registerForm.email"
+          :email="registerForm.email!"
           to="register"
         />
 

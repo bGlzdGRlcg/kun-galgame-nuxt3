@@ -45,9 +45,7 @@ export const getLoli = async () => {
     responses.map((response) => response.blob())
   )
 
-  const [body, eye, brow, mouth, face] = results.map((blob) =>
-    URL.createObjectURL(blob)
-  )
+  const [body, eye, brow, mouth, face] = results.map(URL.createObjectURL)
 
   return {
     loliBodyLeft,
@@ -61,10 +59,10 @@ export const getLoli = async () => {
     loliFaceLeft,
     loliFaceTop,
 
-    body,
-    eye,
-    brow,
-    mouth,
-    face
+    body: body!,
+    eye: eye!,
+    brow: brow!,
+    mouth: mouth!,
+    face: face!
   }
 }

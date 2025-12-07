@@ -23,7 +23,7 @@ const categoryThemeColors = [
 
 const getCategoryPrefix = (tagName: string): string => {
   const match = tagName.match(/^([a-z_]+)\d*$/)
-  return match ? match[1] : 'misc'
+  return match ? match[1]! : 'misc'
 }
 
 const totalScore = computed(() => {
@@ -58,7 +58,7 @@ const categoryStats = computed(() => {
         color:
           categoryThemeColors[
             Object.keys(categories).length % categoryThemeColors.length
-          ]
+          ]!
       }
     }
 

@@ -31,7 +31,7 @@ export const kunUploader: Uploader = async (files, schema) => {
       })
 
       const alt = image.name
-      return schema.nodes.image.createAndFill({
+      return schema.nodes.image!.createAndFill({
         src: result,
         alt
       }) as Node

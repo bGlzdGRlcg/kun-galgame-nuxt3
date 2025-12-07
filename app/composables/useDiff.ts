@@ -6,11 +6,11 @@ export const useDiff = (str1: string, str2: string): string => {
     dp[i] = []
     for (let j = 0; j <= str2.length; j++) {
       if (i === 0 || j === 0) {
-        dp[i][j] = 0
+        dp[i]![j] = 0
       } else if (str1[i - 1] === str2[j - 1]) {
-        dp[i][j] = dp[i - 1][j - 1] + 1
+        dp[i]![j] = dp[i - 1]![j - 1]! + 1
       } else {
-        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+        dp[i]![j] = Math.max(dp[i - 1]![j]!, dp[i]![j - 1]!)
       }
     }
   }
@@ -23,7 +23,7 @@ export const useDiff = (str1: string, str2: string): string => {
       lcs = str1[i - 1] + lcs
       i--
       j--
-    } else if (dp[i - 1][j] > dp[i][j - 1]) {
+    } else if (dp[i - 1]![j]! > dp[i]![j - 1]!) {
       i--
     } else {
       j--

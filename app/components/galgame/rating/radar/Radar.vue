@@ -86,7 +86,7 @@ const onClick = (e: MouseEvent) => {
     0,
     Math.min(props.max, Math.round((dist / radius.value) * props.max))
   )
-  const key = axes[idx].key as AxisKey
+  const key = axes[idx] ? axes[idx].key : ('' as AxisKey)
   const next = { ...values.value, [key]: val }
   emit('update:modelValue', next)
 }

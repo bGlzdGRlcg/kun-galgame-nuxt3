@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Toc } from '@nuxt/content'
+
 const route = useRoute()
 const { data: post } = await useAsyncData(() => {
   return queryCollection('content').path(route.path).first()
@@ -47,7 +49,7 @@ useKunSeoMeta({
 
       <div>
         <div class="fixed -translate-x-67">
-          <DocDetailTableOfContent :toc="post.body.toc" />
+          <DocDetailTableOfContent :toc="post.body.toc as Toc" />
         </div>
       </div>
     </div>

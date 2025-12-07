@@ -32,10 +32,10 @@ const groupedTags = computed(() => {
   const checkboxGroup: WebsiteTag[] = []
 
   for (const category in groups) {
-    if (groups[category].length > 1) {
-      radioGroups[category] = groups[category]
+    if (groups[category]!.length > 1) {
+      radioGroups[category] = groups[category]!
     } else {
-      checkboxGroup.push(...groups[category])
+      checkboxGroup.push(...groups[category]!)
     }
   }
 
@@ -48,7 +48,7 @@ const handleRadioChange = (newTagId: number, category: string) => {
     const newIds = props.tagIds.filter((id) => id !== newTagId)
     emits('updateIds', newIds)
   } else {
-    const categoryTagIds = groupedTags.value.radioGroups[category].map(
+    const categoryTagIds = groupedTags.value.radioGroups[category]!.map(
       (t) => t.id
     )
     const otherTagIds = props.tagIds.filter(
@@ -61,7 +61,7 @@ const handleRadioChange = (newTagId: number, category: string) => {
 
 const getSelectedRadioValue = (category: string): number | null => {
   const categoryTags = groupedTags.value.radioGroups[category]
-  const selectedTag = categoryTags.find((tag) => props.tagIds.includes(tag.id))
+  const selectedTag = categoryTags!.find((tag) => props.tagIds.includes(tag.id))
   return selectedTag ? selectedTag.id : null
 }
 

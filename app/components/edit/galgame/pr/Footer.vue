@@ -7,6 +7,8 @@ const isPublishing = ref(false)
 
 const handlePublishGalgamePR = async () => {
   const galgame = galgamePR.value[0]
+  if (!galgame) return
+
   const data: Record<string, number | string | string[]> = {
     vndbId: galgame.vndbId,
     name_en_us: galgame.name['en-us'],

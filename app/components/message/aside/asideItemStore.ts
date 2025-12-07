@@ -6,9 +6,9 @@ export const replaceAsideItem = (message: ChatMessage) => {
   )
 
   if (targetIndex !== -1) {
-    asideItems.value[targetIndex].content = message.content
-    asideItems.value[targetIndex].lastMessageTime = message.created
-    asideItems.value[targetIndex].count++
+    asideItems.value[targetIndex]!.content = message.content
+    asideItems.value[targetIndex]!.lastMessageTime = message.created
+    asideItems.value[targetIndex]!.count++
   }
 
   asideItems.value.sort((a, b) => {

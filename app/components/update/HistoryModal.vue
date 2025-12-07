@@ -25,8 +25,8 @@ const isEditing = computed(() => !!props.initialData?.updateLogId)
 const isSubmitting = ref(false)
 
 const logTypeOptions = KUN_UPDATE_LOG.map((type) => ({
-  label: KUN_UPDATE_LOG_TYPE_MAP[type],
-  value: type
+  label: KUN_UPDATE_LOG_TYPE_MAP[type] ?? '',
+  value: type ?? 'feat'
 }))
 
 const getInitialFormData = (): UpdateUpdateLogPayload => ({

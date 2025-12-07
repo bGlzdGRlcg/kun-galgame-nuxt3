@@ -1,4 +1,3 @@
-import { randomNum } from '~/utils/random'
 const getAssetsFile = (name: string) => `/alert/${name}.webp`
 
 const number = randomNum(0, 3)

@@ -58,7 +58,7 @@ const toggleTab = () => {
 }
 
 const currentTabLabel = computed(() => {
-  return activeTab.value === 'preview' ? tabs[1].textValue : tabs[0].textValue
+  return activeTab.value === 'preview' ? tabs[1]!.textValue : tabs[0]!.textValue
 })
 </script>
 

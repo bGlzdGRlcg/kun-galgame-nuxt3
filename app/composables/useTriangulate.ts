@@ -49,12 +49,12 @@ const circumCircle = (
   j: number,
   k: number
 ): CircumCircle => {
-  const x1 = vertices[i][0],
-    y1 = vertices[i][1]
-  const x2 = vertices[j][0],
-    y2 = vertices[j][1]
-  const x3 = vertices[k][0],
-    y3 = vertices[k][1]
+  const x1 = vertices[i]![0],
+    y1 = vertices[i]![1]
+  const x2 = vertices[j]![0],
+    y2 = vertices[j]![1]
+  const x3 = vertices[k]![0],
+    y3 = vertices[k]![1]
 
   const fabsy1y2 = Math.abs(y1 - y2)
   const fabsy2y3 = Math.abs(y2 - y3)
@@ -120,10 +120,10 @@ const triangulate = (vertices: Vertex[]): TriangleIndices[] => {
   const verticesCopy = [...vertices]
 
   const indices = Array.from({ length: n }, (_, i) => i)
-  indices.sort((i, j) => verticesCopy[j][0] - verticesCopy[i][0])
+  indices.sort((i, j) => verticesCopy[j]![0] - verticesCopy[i]![0])
 
   const st = superTriangle(verticesCopy)
-  verticesCopy.push(st[0], st[1], st[2])
+  verticesCopy.push(st[0]!, st[1]!, st[2]!)
 
   const open: CircumCircle[] = [circumCircle(verticesCopy, n, n + 1, n + 2)]
   const closed: CircumCircle[] = []
@@ -133,25 +133,25 @@ const triangulate = (vertices: Vertex[]): TriangleIndices[] => {
     edges.length = 0
 
     for (let j = open.length; j--; ) {
-      const dx = verticesCopy[c][0] - open[j].x
-      if (dx > 0.0 && dx * dx > open[j].r) {
-        closed.push(open[j])
+      const dx = verticesCopy[c]![0] - open[j]!.x
+      if (dx > 0.0 && dx * dx > open[j]!.r) {
+        closed.push(open[j]!)
         open.splice(j, 1)
         continue
       }
 
-      const dy = verticesCopy[c][1] - open[j].y
-      if (dx * dx + dy * dy - open[j].r > EPSILON) {
+      const dy = verticesCopy[c]![1] - open[j]!.y
+      if (dx * dx + dy * dy - open[j]!.r > EPSILON) {
         continue
       }
 
       edges.push(
-        open[j].i,
-        open[j].j,
-        open[j].j,
-        open[j].k,
-        open[j].k,
-        open[j].i
+        open[j]!.i,
+        open[j]!.j,
+        open[j]!.j,
+        open[j]!.k,
+        open[j]!.k,
+        open[j]!.i
       )
       open.splice(j, 1)
     }
@@ -161,7 +161,7 @@ const triangulate = (vertices: Vertex[]): TriangleIndices[] => {
     for (let j = edges.length; j > 0; ) {
       const b = edges[--j]
       const a = edges[--j]
-      open.push(circumCircle(verticesCopy, a, b, c))
+      open.push(circumCircle(verticesCopy, a!, b!, c!))
     }
   }
 

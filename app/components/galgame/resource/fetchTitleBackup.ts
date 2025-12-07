@@ -49,7 +49,7 @@ export const _fetchTitle = async (
   if (withTitle.length > 0) {
     best =
       withTitle.find((c) => c.url === rootUrl || c.url === root2.url) ??
-      withTitle[0]
+      withTitle[0]!
   } else {
     const anyTitle = candidates.find(
       (c) => c.title && c.title.trim().length > 0

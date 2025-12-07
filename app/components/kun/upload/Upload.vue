@@ -75,7 +75,7 @@ const handleDrop = (event: DragEvent) => {
   event.preventDefault()
   event.stopPropagation()
   const dataTransfer = event.dataTransfer
-  if (dataTransfer?.files.length) {
+  if (dataTransfer?.files.length && dataTransfer.files[0]) {
     uploadImage(dataTransfer.files[0])
   }
 }

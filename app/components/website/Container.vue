@@ -44,7 +44,7 @@ const filteredAndSortedWebsites = computed(() => {
   )
 
   for (const category in categorized) {
-    categorized[category].sort((a, b) => {
+    categorized[category]!.sort((a, b) => {
       return a.price - b.price
     })
   }

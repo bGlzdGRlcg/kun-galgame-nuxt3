@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
-const title = computed(() => galgamePR.value[0].name)
+const title = computed(() => galgamePR.value[0]!.name)
 </script>
 
 <template>

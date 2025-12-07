@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  KUN_ACTIVITY_TYPE_TYPE,
-  KUN_ACTIVITY_ICON_MAP
-} from '~/constants/activity'
+import { KUN_ACTIVITY_TYPE_TYPE } from '~/constants/activity'
 
 const pageData = reactive({
   page: 1,

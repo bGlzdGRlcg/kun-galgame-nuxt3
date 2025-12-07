@@ -24,7 +24,7 @@ const randomizeQuestion = () => {
 
 const userAnswers = ref('')
 const currentQuestionIndex = ref(randomizeQuestion())
-const currentQuestion = ref(questions.value[currentQuestionIndex.value])
+const currentQuestion = ref(questions.value[currentQuestionIndex.value]!)
 const errorCounter = ref(0)
 const currentIndex = ref(0)
 const isShowHint = ref(false)
@@ -33,7 +33,7 @@ const isShowAnswer = ref(false)
 const resetStatus = () => {
   userAnswers.value = ''
   currentQuestionIndex.value = randomizeQuestion()
-  currentQuestion.value = questions.value[currentQuestionIndex.value]
+  currentQuestion.value = questions.value[currentQuestionIndex.value]!
   errorCounter.value = 0
   currentIndex.value = 0
   isShowHint.value = false
@@ -43,7 +43,7 @@ const resetStatus = () => {
 const nextQuestion = () => {
   const randomIndex = randomizeQuestion()
   currentQuestionIndex.value = randomIndex
-  currentQuestion.value = questions.value[currentQuestionIndex.value]
+  currentQuestion.value = questions.value[currentQuestionIndex.value]!
 }
 
 const submitAnswer = () => {

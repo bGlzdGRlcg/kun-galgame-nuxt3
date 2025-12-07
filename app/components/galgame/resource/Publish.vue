@@ -88,14 +88,14 @@ const handleCancel = () => {
 watch(
   () => rewriteResourceId.value,
   () => {
-    if (rewriteResourceId.value) {
+    if (rewriteResourceId.value && resources.value[0]) {
       resourceLink.value = resources.value[0]
     }
   }
 )
 
 onMounted(() => {
-  if (rewriteResourceId.value) {
+  if (rewriteResourceId.value && resources.value[0]) {
     resourceLink.value = resources.value[0]
   }
 })

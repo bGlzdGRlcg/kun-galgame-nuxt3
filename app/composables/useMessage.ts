@@ -14,14 +14,14 @@ export type KunMessagePosition =
 export interface KunMessageOptions {
   id: string
   message: string
-  type: MessageType
+  type: KunMessageType
   duration: number
   richText: boolean
-  position: MessagePosition
+  position: KunMessagePosition
   count: number
 }
 
-const messages: Ref<MessageOptions[]> = ref([])
+const messages: Ref<KunMessageOptions[]> = ref([])
 let seed = 0
 let containerRef: HTMLElement | null = null
 
@@ -45,15 +45,17 @@ const initializeContainer = () => {
 
 export const useMessage = (
   messageData: number | string,
-  type: MessageType,
+  type: KunMessageType,
   duration = 3000,
   richText = false,
-  position = 'top-center' as MessagePosition
+  position = 'top-center' as KunMessagePosition
 ) => {
   initializeContainer()
 
   const resolvedMessage =
-    typeof messageData === 'string' ? messageData : infoMessages[messageData]
+    typeof messageData === 'string'
+      ? messageData
+      : (infoMessages[messageData] ?? '')
 
   const existingMessage = messages.value.find(
     (m) =>
@@ -69,7 +71,7 @@ export const useMessage = (
     seed++
     const id = `message_${seed}`
 
-    const newMessage: MessageOptions = {
+    const newMessage: KunMessageOptions = {
       id,
       message: resolvedMessage,
       type,

@@ -21,7 +21,7 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
           <h2 class="text-xl">VNDB 编号</h2>
           <div class="my-2 flex items-center justify-center gap-2">
             <KunInput
-              v-model="galgamePR[0].vndbId"
+              v-model="galgamePR[0]!.vndbId"
               placeholder="例如: v19658"
             />
           </div>

@@ -35,7 +35,7 @@ export const useTopicTOC = () => {
         const [floor, content] = element.id.split('.', 2)
         return {
           id: element.id,
-          text: content ? `${floor}. ${content}` : floor,
+          text: content ? `${floor}. ${content}` : (floor ?? ''),
           level: 2,
           type: 'reply' as const
         }

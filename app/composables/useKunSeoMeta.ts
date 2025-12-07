@@ -32,6 +32,11 @@ export const useKunSeoMeta = (
   const route = useRoute()
 
   const pageUrl = `${kungal.domain.main}${route.path}`
+  const image = input.ogImage
+    ? input.ogImage
+    : kungal.images[0]
+      ? kungal.images[0].fullUrl
+      : '/kungalgame.webp'
 
   useSeoMeta(
     {
@@ -42,12 +47,12 @@ export const useKunSeoMeta = (
       ogType: input.ogType || 'website',
       ogTitle: title,
       ogDescription: description,
-      ogImage: input.ogImage || kungal.images[0].fullUrl,
+      ogImage: image,
       ogImageAlt: title,
       twitterCard: 'summary_large_image',
       twitterTitle: title,
       twitterDescription: description,
-      twitterImage: input.ogImage || kungal.images[0].fullUrl,
+      twitterImage: image,
       twitterImageAlt: title,
       ...input
     },

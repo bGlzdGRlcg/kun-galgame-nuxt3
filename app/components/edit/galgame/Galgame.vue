@@ -48,7 +48,7 @@ const handleGetVNData = async () => {
   })
 
   if (vndbData) {
-    if (!vndbData.results.length) {
+    if (!vndbData.results.length || !vndbData.results[0]) {
       isFetching.value = false
       useMessage(10503, 'error')
       return

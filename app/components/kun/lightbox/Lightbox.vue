@@ -146,10 +146,10 @@ const startDrag = (e: MouseEvent | TouchEvent) => {
   dragStartTime.value = Date.now()
 
   const point = 'touches' in e ? e.touches[0] : e
-  dragStart.x = point.clientX - position.x
-  dragStart.y = point.clientY - position.y
-  initialDragPosition.x = point.clientX
-  initialDragPosition.y = point.clientY
+  dragStart.x = point!.clientX - position.x
+  dragStart.y = point!.clientY - position.y
+  initialDragPosition.x = point!.clientX
+  initialDragPosition.y = point!.clientY
 }
 
 const onDrag = (e: MouseEvent | TouchEvent) => {
@@ -158,14 +158,14 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
   const point = 'touches' in e ? e.touches[0] : e
 
   if (scale.value <= 1) {
-    const deltaX = point.clientX - initialDragPosition.x
+    const deltaX = point!.clientX - initialDragPosition.x
     position.x = deltaX
     return
   }
 
   const newPosition = {
-    x: point.clientX - dragStart.x,
-    y: point.clientY - dragStart.y
+    x: point!.clientX - dragStart.x,
+    y: point!.clientY - dragStart.y
   }
 
   const constrained = constrainPosition(newPosition.x, newPosition.y)
@@ -178,7 +178,7 @@ const stopDrag = (e: MouseEvent | TouchEvent) => {
 
   const point =
     'touches' in e ? (e as TouchEvent).changedTouches[0] : (e as MouseEvent)
-  const deltaX = point.clientX - initialDragPosition.x
+  const deltaX = point!.clientX - initialDragPosition.x
   const deltaTime = Date.now() - dragStartTime.value
   const velocity = Math.abs(deltaX) / deltaTime
 
@@ -226,11 +226,11 @@ const handleTouchStart = (e: TouchEvent) => {
     const touch1 = e.touches[0]
     const touch2 = e.touches[1]
     lastTouchDistance.value = Math.hypot(
-      touch2.clientX - touch1.clientX,
-      touch2.clientY - touch1.clientY
+      touch2!.clientX - touch1!.clientX,
+      touch2!.clientY - touch1!.clientY
     )
-    lastTouch.x = (touch1.clientX + touch2.clientX) / 2
-    lastTouch.y = (touch1.clientY + touch2.clientY) / 2
+    lastTouch.x = (touch1!.clientX + touch2!.clientX) / 2
+    lastTouch.y = (touch1!.clientY + touch2!.clientY) / 2
   } else {
     startDrag(e)
   }
@@ -241,11 +241,11 @@ const handleTouchMove = (e: TouchEvent) => {
     const touch1 = e.touches[0]
     const touch2 = e.touches[1]
     const currentDistance = Math.hypot(
-      touch2.clientX - touch1.clientX,
-      touch2.clientY - touch1.clientY
+      touch2!.clientX - touch1!.clientX,
+      touch2!.clientY - touch1!.clientY
     )
-    const centerX = (touch1.clientX + touch2.clientX) / 2
-    const centerY = (touch1.clientY + touch2.clientY) / 2
+    const centerX = (touch1!.clientX + touch2!.clientX) / 2
+    const centerY = (touch1!.clientY + touch2!.clientY) / 2
 
     const delta = (currentDistance - lastTouchDistance.value) * 0.01
     const newScale = Math.max(

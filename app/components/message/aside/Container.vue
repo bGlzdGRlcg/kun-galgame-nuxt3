@@ -29,12 +29,12 @@ asideItems.value = contact.value ? contact.value : []
 
     <KunDivider />
 
-    <MessageAsideSystemItem v-if="system" title="通知" :data="system[0]" />
+    <MessageAsideSystemItem v-if="system" title="通知" :data="system[0]!" />
 
-    <MessageAsideSystemItem v-if="system" title="系统消息" :data="system[1]">
+    <MessageAsideSystemItem v-if="system" title="系统消息" :data="system[1]!">
       <template #system>
-        <span v-if="!system[1].unreadCount" class="zako">杂鱼~♡</span>
-        <span v-if="system[1].unreadCount" class="new">
+        <span v-if="!system[1]!.unreadCount" class="zako">杂鱼~♡</span>
+        <span v-if="system[1]!.unreadCount" class="new">
           {{ `「 新消息 」` }}
         </span>
       </template>

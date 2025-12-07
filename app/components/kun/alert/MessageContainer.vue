@@ -10,7 +10,7 @@ import MessageItem from './MessageItem.vue'
 const { messages, removeMessage } = useMessageState()
 
 const positionedMessages = computed(() => {
-  const groups: Record<MessagePosition, KunMessageOptions[]> = {
+  const groups: Record<KunMessagePosition, KunMessageOptions[]> = {
     'top-left': [],
     'top-center': [],
     'top-right': [],
@@ -40,7 +40,7 @@ const positionClasses: Record<KunMessagePosition, string> = {
     :key="position"
     :class="[
       'pointer-events-none fixed z-[7777] flex w-full max-w-sm flex-col p-4',
-      positionClasses[position as MessagePosition]
+      positionClasses[position as KunMessagePosition]
     ]"
   >
     <TransitionGroup name="message-list" tag="div" class="w-full">

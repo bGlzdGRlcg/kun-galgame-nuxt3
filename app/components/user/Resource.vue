@@ -59,8 +59,7 @@ const submitFix = async (index: number) => {
     return
   }
 
-  const linkArray = draftLinks.value[index]
-    .split('\n')
+  const linkArray = draftLinks.value[index]!.split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
 

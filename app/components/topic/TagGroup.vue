@@ -75,12 +75,12 @@ const handleClickSection = async (section: string) => {
       <KunBadge
         v-for="(sec, index) in props.section"
         :key="index"
-        :color="sectionColors[sec.toLowerCase()[0]]"
+        :color="sectionColors[sec.toLowerCase()[0]!]"
         @click="handleClickSection(sec.toLowerCase())"
         :class-name="cn(props.isNavToSection ? 'cursor-pointer' : '')"
       >
         <KunIcon
-          :name="iconMap[sec.toLowerCase()[0]]"
+          :name="iconMap[sec.toLowerCase()[0]!]"
           class="size-4 text-inherit"
         />
         {{ KUN_TOPIC_SECTION[sec] }}

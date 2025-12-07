@@ -17,15 +17,15 @@ const unlockScroll = () => {
 }
 
 const handleTouchStart = (event: TouchEvent) => {
-  startX.value = event.touches[0].clientX
-  startY.value = event.touches[0].clientY
+  startX.value = event.touches[0]!.clientX
+  startY.value = event.touches[0]!.clientY
   currentX.value = 0
   isDragging.value = true
 }
 
 const handleTouchMove = (event: TouchEvent) => {
-  const touchX = event.touches[0].clientX
-  const touchY = event.touches[0].clientY
+  const touchX = event.touches[0]!.clientX
+  const touchY = event.touches[0]!.clientY
   const deltaX = touchX - startX.value
   const deltaY = touchY - startY.value
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string
-  data: AsideItem
+  data: ChatMessageAsideItem
 }>()
 </script>
 

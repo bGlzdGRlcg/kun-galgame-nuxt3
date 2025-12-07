@@ -16,7 +16,6 @@ const searchResults = ref<GalgameSeriesSearchItem[]>([])
 const selectedGalgames = ref<GalgameSeriesSearchItem[]>([])
 const isLoading = ref(false)
 const isDropdownOpen = ref(false)
-const wrapperRef = ref<HTMLElement | null>(null)
 
 const internalIds = computed({
   get: () => props.modelValue,

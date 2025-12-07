@@ -7,7 +7,11 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 const { aliases } = storeToRefs(usePersistEditGalgameStore())
 
 const selectedAlias = ref(
-  props.type === 'create' ? aliases.value : galgamePR.value[0].alias
+  props.type === 'create'
+    ? aliases.value
+    : galgamePR.value[0]
+      ? galgamePR.value[0].alias
+      : []
 )
 const isInputFocus = ref(false)
 const inputValue = ref('')
@@ -64,7 +68,8 @@ watch(
   () => {
     if (props.type === 'create') {
       aliases.value = selectedAlias.value
-    } else {
+    }
+    if (galgamePR.value[0]) {
       galgamePR.value[0].alias = selectedAlias.value
     }
   }

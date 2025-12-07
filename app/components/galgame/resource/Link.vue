@@ -93,7 +93,7 @@ const findKnownProvider = (domain: string): string | null => {
   }
   // 'lanzou' - lanzouj, lanzouq, lanzouw
   if (domain.includes('lanzou')) {
-    return GALGAME_RESOURCE_PROVIDER_MAP.lanzou
+    return GALGAME_RESOURCE_PROVIDER_MAP.lanzou!
   }
   return null
 }

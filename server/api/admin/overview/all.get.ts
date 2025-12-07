@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
       name: modelName,
       label: modelInfo.label,
       color: modelInfo.color,
-      count: counts[index]
+      count: counts[index] ?? 0
     }
   })
 

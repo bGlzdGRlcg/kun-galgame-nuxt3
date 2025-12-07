@@ -51,7 +51,7 @@ const updateSliderValue = (e: MouseEvent | TouchEvent) => {
   if (!sliderRef.value) return
 
   const rect = sliderRef.value.getBoundingClientRect()
-  const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX
+  const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0]!.clientX
   const newValue =
     ((clientX - rect.left) / rect.width) * (state.max - state.min) + state.min
 

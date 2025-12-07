@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  room: AsideItem
+  room: ChatMessageAsideItem
 }>()
 </script>
 

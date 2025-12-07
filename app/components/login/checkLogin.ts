@@ -1,5 +1,3 @@
-import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
-
 const checkUsername = (name: string) => {
   if (!name.trim()) {
     useMessage(10136, 'warn')

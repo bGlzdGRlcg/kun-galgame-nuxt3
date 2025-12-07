@@ -9,7 +9,7 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 const isNsfw =
   props.type === 'create'
     ? contentLimit.value === 'nsfw'
-    : galgamePR.value[0].contentLimit === 'nsfw'
+    : galgamePR.value[0]!.contentLimit === 'nsfw'
 const option = ref(isNsfw)
 
 watch(
@@ -19,7 +19,7 @@ watch(
     if (props.type === 'create') {
       contentLimit.value = optionString
     } else {
-      galgamePR.value[0].contentLimit = optionString
+      galgamePR.value[0]!.contentLimit = optionString
     }
   }
 )

@@ -3,7 +3,12 @@ interface KunImageProps {
   src: string
   alt?: string
   loading?: 'lazy' | 'eager'
-  placeholder?: string | number | boolean | unknown[]
+  placeholder?:
+    | string
+    | number
+    | boolean
+    | [w: number, h: number, q?: number | undefined, b?: number | undefined]
+    | undefined
   className?: string
   ariaLabel?: string
   format?: string

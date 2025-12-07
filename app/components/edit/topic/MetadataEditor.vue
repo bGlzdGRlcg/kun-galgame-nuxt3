@@ -67,7 +67,7 @@ const handleRemoveTag = (tagToRemove: string) => {
 
 const handleTagInputBackspace = () => {
   if (tagInput.value === '' && tags.value.length > 0) {
-    handleRemoveTag(tags.value[tags.value.length - 1])
+    handleRemoveTag(tags.value[tags.value.length - 1]!)
   }
 }
 </script>

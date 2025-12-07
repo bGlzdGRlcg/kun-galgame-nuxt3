@@ -11,7 +11,7 @@ const valueMarkdown = computed(() => {
   if (props.type === 'publish') {
     return introduction.value[props.lang]
   } else {
-    return galgamePR.value[0].introduction[props.lang]
+    return galgamePR.value[0]!.introduction[props.lang]
   }
 })
 
@@ -19,7 +19,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
   if (props.type === 'publish') {
     introduction.value[props.lang] = editorMarkdown
   } else {
-    galgamePR.value[0].introduction[props.lang] = editorMarkdown
+    galgamePR.value[0]!.introduction[props.lang] = editorMarkdown
   }
 }, 107)
 </script>

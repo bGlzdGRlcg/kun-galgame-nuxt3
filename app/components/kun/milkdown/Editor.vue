@@ -131,6 +131,7 @@ const editorInfo = useEditor((root) =>
         onCopy: () => {},
         noResultText: '无结果',
         renderLanguage: defaultConfig.renderLanguage,
+        previewLoading: '加载中...',
         renderPreview: defaultConfig.renderPreview,
         previewToggleButton: (previewOnlyMode) => {
           const icon = previewOnlyMode ? editIcon : visibilityOffIcon
@@ -147,13 +148,11 @@ const editorInfo = useEditor((root) =>
 
       ctx.update(codeBlockConfig.key, (prev) => ({
         ...prev,
-        // @ts-expect-error milkdown type
         renderPreview: (language, content, applyPreview) => {
           if (language.toLowerCase() === 'latex' && content.length > 0) {
             return renderLatex(content, katexOptions)
           }
           const renderPreview = prev.renderPreview
-          // @ts-expect-error milkdown type
           return renderPreview(language, content, applyPreview)
         }
       }))

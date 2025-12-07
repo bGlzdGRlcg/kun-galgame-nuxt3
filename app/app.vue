@@ -10,7 +10,10 @@ const config = useRuntimeConfig()
 useHead({
   htmlAttrs: { lang: 'zh-Hans' },
   meta: [
-    { name: 'image', content: kungal.images[0].fullUrl },
+    {
+      name: 'image',
+      content: kungal.images[0] ? kungal.images[0].fullUrl : '/kungalgame.webp'
+    },
     {
       name: 'yandex-verification',
       content: config.public.KUN_VISUAL_NOVEL_FORUM_YANDEX_VERIFICATION
@@ -74,7 +77,9 @@ useSeoMeta({
   ogType: 'website',
 
   // use absolute URLs
-  ogImage: kungal.images[0].fullUrl,
+  ogImage: kungal.images[0]
+    ? kungal.images[0].fullUrl
+    : `${kungal.domain.main}/kungalgame.webp`,
   ogImageAlt: kungal.title,
 
   ogImageWidth: 1920,

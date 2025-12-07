@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { calcGalgameRating } from '~/algorithms/GalgameRatingAlg'
+import { calcGalgameRating } from '~~/algorithms/GalgameRatingAlg'
 import {
   KUN_GALGAME_RATING_SPOILER_COLOR_MAP,
   KUN_GALGAME_RATING_SPOILER_MAP,
