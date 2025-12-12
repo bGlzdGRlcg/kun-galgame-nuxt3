@@ -24,7 +24,7 @@ const getLanguageName = (langCode: string) => {
     >
       <KunImage
         data-kun-lazy-image="true"
-        class="size-full object-cover"
+        class="size-full rounded-lg object-cover"
         :src="galgame.banner"
         loading="lazy"
         :alt="getPreferredLanguageText(galgame.name)"

@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { useGalgameResourceProvider } from '~/composables/galgame/useGalgameResourceProvider'
+
 const { id, role } = usePersistUserStore()
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
+const { providerName, resolveProviderName } = useGalgameResourceProvider()
+
 const props = defineProps<{
   details: GalgameResourceDetails
+  resourceTypeLabel: string
   refresh: () => void
 }>()
 
 const isFetching = ref(false)
+const isShowDownloadLinks = ref(false)
 const isResourceExpired = computed(() => props.details.status === 1)
 
 const handleDeleteResource = async (
@@ -71,6 +77,10 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
   resources.value[0] = { ...details }
   rewriteResourceId.value = details.id
 }
+
+onMounted(() => {
+  resolveProviderName(props.details.linkDomain)
+})
 </script>
 
 <template>
@@ -97,48 +107,67 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
     <KunInfo
       :color="isResourceExpired ? 'warning' : 'success'"
       variant="bordered"
-      title="下载链接 - 点击下面的链接以下载"
       class-name="relative"
     >
-      <KunLink
-        v-for="(kun, index) in details.link"
-        :key="index"
-        :to="kun"
-        target="_blank"
-        rel="noopener noreferrer"
-        :is-show-anchor-icon="true"
-      >
-        {{ kun }}
-      </KunLink>
+      <template #title>
+        <div class="flex w-full flex-wrap items-center gap-2">
+          <span>
+            {{ `${props.resourceTypeLabel}下载链接` }}
+          </span>
+          <span class="text-default-500 text-sm">{{ providerName }}</span>
+          <KunButton
+            class-name="ml-auto whitespace-nowrap"
+            :color="isResourceExpired ? 'warning' : 'success'"
+            @click="isShowDownloadLinks = !isShowDownloadLinks"
+          >
+            获取链接
+          </KunButton>
+        </div>
+      </template>
 
-      <div class="mt-3 flex items-center justify-end gap-2">
-        <KunCopy
-          variant="solid"
-          :color="isResourceExpired ? 'warning' : 'success'"
-          v-if="details.code"
-          :name="`提取码 ${details.code}`"
-          :text="details.code"
-        />
-        <KunCopy
-          variant="solid"
-          :color="isResourceExpired ? 'warning' : 'success'"
-          v-if="details.password"
-          :name="`解压码 ${details.password}`"
-          :text="details.password"
-        />
-      </div>
+      <template #default v-if="isShowDownloadLinks">
+        <p class="text-default-500 text-sm">点击下面的链接以下载</p>
+        <KunLink
+          v-for="(kun, index) in details.link"
+          :key="index"
+          :to="kun"
+          target="_blank"
+          rel="noopener noreferrer"
+          :is-show-anchor-icon="true"
+        >
+          {{ kun }}
+        </KunLink>
 
-      <KunBadge
-        class="absolute -top-3 -right-3"
-        :color="isResourceExpired ? 'danger' : 'success'"
-        variant="solid"
-      >
-        {{
-          isResourceExpired
-            ? '该资源链接被其它用户标记为失效'
-            : '该资源链接可用'
-        }}
-      </KunBadge>
+        <div class="mt-3 flex items-center justify-end gap-2">
+          <KunCopy
+            variant="solid"
+            :color="isResourceExpired ? 'warning' : 'success'"
+            v-if="details.code"
+            :name="`提取码 ${details.code}`"
+            :text="details.code"
+          />
+          <KunCopy
+            variant="solid"
+            :color="isResourceExpired ? 'warning' : 'success'"
+            v-if="details.password"
+            :name="`解压码 ${details.password}`"
+            :text="details.password"
+          />
+        </div>
+
+        <div class="mt-3 flex justify-end">
+          <KunBadge
+            :color="isResourceExpired ? 'danger' : 'success'"
+            variant="solid"
+          >
+            {{
+              isResourceExpired
+                ? '该资源链接被其它用户标记为失效'
+                : '该资源链接可用'
+            }}
+          </KunBadge>
+        </div>
+      </template>
     </KunInfo>
 
     <KunInfo title="补票提示信息" color="danger">
@@ -165,7 +194,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
     </KunInfo>
 
     <div
-      class="mt-auto flex items-center justify-end gap-1"
+      class="mt-auto flex flex-wrap items-center justify-end gap-1"
       v-if="details.user.id === id || role > 1"
     >
       <KunButton

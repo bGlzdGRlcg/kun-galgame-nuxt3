@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  GALGAME_RESOURCE_PROVIDER_MAP,
   GALGAME_RESOURCE_TYPE_ICON_MAP,
   GALGAME_RESOURCE_PLATFORM_ICON_MAP
 } from '~/constants/galgameResource'
@@ -9,19 +8,19 @@ import {
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
   KUN_GALGAME_RESOURCE_PLATFORM_MAP
 } from '~/constants/galgame'
-import { fetchTitle } from './_fetchTitle'
+import { useGalgameResourceProvider } from '~/composables/galgame/useGalgameResourceProvider'
 
 const props = defineProps<{
   resource: GalgameResource
   refresh: () => void
 }>()
 
-const providerName = ref('')
 const details = ref<GalgameResourceDetails>()
 const isModalOpen = ref(false)
-const { id } = usePersistUserStore()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
+const { id } = usePersistUserStore()
+const { providerName, resolveProviderName } = useGalgameResourceProvider()
 
 const handleMarkValid = async (
   galgameId: number,
@@ -56,31 +55,8 @@ watch(
   }
 )
 
-const findKnownProvider = (domain: string): string | null => {
-  if (GALGAME_RESOURCE_PROVIDER_MAP[domain]) {
-    return GALGAME_RESOURCE_PROVIDER_MAP[domain]
-  }
-  // 'lanzou' - lanzouj, lanzouq, lanzouw
-  if (domain.includes('lanzou')) {
-    return GALGAME_RESOURCE_PROVIDER_MAP.lanzou!
-  }
-  return null
-}
-
-onMounted(async () => {
-  const knownName = findKnownProvider(props.resource.linkDomain)
-
-  if (knownName) {
-    providerName.value = knownName
-  } else {
-    providerName.value = '正在获取资源提供方信息...'
-    try {
-      const result = await fetchTitle(props.resource.linkDomain)
-      providerName.value = result.title || props.resource.linkDomain
-    } catch (error) {
-      providerName.value = props.resource.linkDomain
-    }
-  }
+onMounted(() => {
+  resolveProviderName(props.resource.linkDomain)
 })
 </script>
 

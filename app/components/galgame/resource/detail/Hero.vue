@@ -36,11 +36,10 @@ const platformLabels = computed(() => {
 <template>
   <KunCard :is-hoverable="false" :is-transparent="false">
     <div class="grid grid-cols-1 gap-3 md:grid-cols-4 lg:grid-cols-5">
-      <div class="relative md:col-span-2">
+      <div class="relative aspect-video md:col-span-2">
         <KunImage
           data-kun-lazy-image="true"
-          class="max-h-70 rounded-lg object-cover"
-          :style="{ aspectRatio: '16/9' }"
+          class="size-full rounded-lg object-cover"
           :src="galgame.banner"
           loading="lazy"
           :alt="getPreferredLanguageText(galgame.name)"

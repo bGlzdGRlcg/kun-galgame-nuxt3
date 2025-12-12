@@ -10,6 +10,7 @@ import {
 } from '~/constants/galgameResource'
 
 const props = defineProps<{
+  galgame: GalgameResourceSummary
   resource: GalgameResourceDetails
   refresh: () => Promise<void>
 }>()
@@ -28,6 +29,7 @@ const resourcePlatformLabel = computed(
     KUN_GALGAME_RESOURCE_PLATFORM_MAP[props.resource.platform] ||
     props.resource.platform
 )
+const galgameTitle = getPreferredLanguageText(props.galgame.name)
 </script>
 
 <template>
@@ -37,9 +39,9 @@ const resourcePlatformLabel = computed(
     content-class="space-y-4 h-full justify-start"
   >
     <KunHeader
-      name="Galgame 资源详情"
+      :name="`${galgameTitle} ${props.resource.platform === 'others' ? '' : resourcePlatformLabel} ${resourceLanguageLabel}${resourceTypeLabel}资源下载`"
       description="查看该 Galgame 的下载信息, 若失效请及时向资源发布者反馈或贡献新的下载资源。"
-      scale="h3"
+      scale="h2"
     />
 
     <div class="flex flex-wrap gap-2">
@@ -67,6 +69,10 @@ const resourcePlatformLabel = computed(
       </KunBadge>
     </div>
 
-    <GalgameResourceDetailInfo :details="resource" :refresh="refresh" />
+    <GalgameResourceDetailInfo
+      :resource-type-label="resourceTypeLabel"
+      :details="resource"
+      :refresh="refresh"
+    />
   </KunCard>
 </template>

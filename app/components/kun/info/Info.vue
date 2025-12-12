@@ -4,7 +4,7 @@ import type { KunUIVariant, KunUIColor } from '../ui/type'
 type KunInfoColor = KunUIColor | 'info'
 
 interface Props {
-  title: string
+  title?: string
   description?: string
   className?: string
   color?: KunInfoColor
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  title: '',
   description: '',
   color: 'default',
   className: '',
@@ -143,7 +144,9 @@ const titleColor = computed(() => {
         :name="icon"
         :class-name="cn('h-5 w-5 flex-shrink-0')"
       />
-      <span>{{ title }}</span>
+      <span v-if="title">{{ title }}</span>
+
+      <slot name="title" />
     </h3>
 
     <div v-if="description || $slots.default" class="text-sm opacity-90">
