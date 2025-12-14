@@ -1,3 +1,4 @@
+import { useMessage } from '~/composables/useMessage'
 import { errorMessages } from '~/error/errorI18n'
 
 export const kungalgameErrorHandler = (errorNumber: string) => {

@@ -1,3 +1,7 @@
+import { useState } from 'nuxt/app'
+import { randomNum } from './random'
+import { kungal } from '~/config/kungal'
+
 export const getRandomSticker = (id: string) => {
   const key = `random-sticker-${id}`
 
