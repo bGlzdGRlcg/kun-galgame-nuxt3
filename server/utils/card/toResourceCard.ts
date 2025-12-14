@@ -1,5 +1,6 @@
 export const toResourceCard = (resource: {
   id: number
+  view: number
   galgame_id: number
   user: KunUser
   type: string
@@ -9,6 +10,7 @@ export const toResourceCard = (resource: {
   status: number
   download: number
   created: Date
+  edited: Date | null
   like: { id: number }[]
   _count: { like: number }
   galgame: {
@@ -19,6 +21,7 @@ export const toResourceCard = (resource: {
   }
 }): GalgameResourceCard => ({
   id: resource.id,
+  view: resource.view,
   galgameId: resource.galgame_id,
   user: resource.user,
   type: resource.type,
@@ -30,6 +33,7 @@ export const toResourceCard = (resource: {
   likeCount: resource._count.like,
   isLiked: resource.like.length > 0,
   linkDomain: '',
+  edited: resource.edited,
   created: resource.created,
   galgameName: {
     'en-us': resource.galgame.name_en_us,

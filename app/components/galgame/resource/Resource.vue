@@ -109,8 +109,9 @@ const { data, status, refresh } = await useLazyFetch(
     >
       <GalgameResourcePublish
         :refresh="refresh"
-        @close="isShowPublish = false"
         :galgame-id="gid"
+        @close="isShowPublish = false"
+        @refresh="refresh"
       />
     </KunModal>
 

@@ -77,6 +77,8 @@ const handleReportExpire = async () => {
 }
 
 const handleGetResourceLink = async () => {
+  if (detail.value) return
+
   isFetching.value = true
   const result = await $fetch(
     `/api/galgame-resource/${props.resource.id}/detail`,
@@ -158,60 +160,62 @@ onMounted(() => {
       </template>
 
       <template #default v-if="detail">
-        <p class="text-default-500 text-sm">点击下面的链接以下载</p>
-        <KunLink
-          v-for="(kun, index) in detail.link"
-          :key="index"
-          :to="kun"
-          target="_blank"
-          rel="noopener noreferrer"
-          :is-show-anchor-icon="true"
-        >
-          {{ kun }}
-        </KunLink>
-
-        <div class="mt-3 flex items-center justify-end gap-2">
-          <KunCopy
-            variant="solid"
-            :color="isResourceExpired ? 'warning' : 'success'"
-            v-if="detail.code"
-            :name="`提取码 ${detail.code}`"
-            :text="detail.code"
-          />
-          <KunCopy
-            variant="solid"
-            :color="isResourceExpired ? 'warning' : 'success'"
-            v-if="detail.password"
-            :name="`解压码 ${detail.password}`"
-            :text="detail.password"
-          />
-        </div>
-
-        <div class="mt-3 flex justify-end">
-          <KunBadge
-            :color="isResourceExpired ? 'danger' : 'success'"
-            variant="solid"
+        <div class="space-y-3">
+          <p class="text-default-500 text-sm">点击下面的链接以下载</p>
+          <KunLink
+            v-for="(kun, index) in detail.link"
+            :key="index"
+            :to="kun"
+            target="_blank"
+            rel="noopener noreferrer"
+            :is-show-anchor-icon="true"
           >
-            {{
-              isResourceExpired
-                ? '该资源链接被其它用户标记为失效'
-                : '该资源链接可用'
-            }}
-          </KunBadge>
+            {{ kun }}
+          </KunLink>
+
+          <div class="flex items-center gap-2">
+            <KunCopy
+              variant="solid"
+              :color="isResourceExpired ? 'warning' : 'success'"
+              v-if="detail.code"
+              :name="`提取码 ${detail.code}`"
+              :text="detail.code"
+            />
+            <KunCopy
+              variant="solid"
+              :color="isResourceExpired ? 'warning' : 'success'"
+              v-if="detail.password"
+              :name="`解压码 ${detail.password}`"
+              :text="detail.password"
+            />
+          </div>
+
+          <KunInfo title="补票提示信息" color="danger">
+            <p>
+              须知 Galgame 厂商制作游戏不易, 很多厂商如今都在炒冷饭,
+              可见经济并不宽裕。如果条件允许, 请尽可能前往
+              <KunLink size="sm" :to="`/galgame/${resource.galgameId}`">
+                Galgame 详情
+              </KunLink>
+              中的 Galgame 制作商部分 进行正版 Galgame 补票, 感谢您对 Galgame
+              业界做出的贡献
+            </p>
+          </KunInfo>
+
+          <div class="flex justify-end">
+            <KunBadge
+              :color="isResourceExpired ? 'danger' : 'success'"
+              variant="solid"
+            >
+              {{
+                isResourceExpired
+                  ? '该资源链接被其它用户标记为失效'
+                  : '该资源链接可用'
+              }}
+            </KunBadge>
+          </div>
         </div>
       </template>
-    </KunInfo>
-
-    <KunInfo title="补票提示信息" color="danger">
-      <p>
-        须知 Galgame 厂商制作游戏不易, 很多厂商如今都在炒冷饭,
-        可见经济并不宽裕。如果条件允许, 请尽可能前往
-        <KunLink size="sm" :to="`/galgame/${resource.galgameId}`">
-          Galgame 详情
-        </KunLink>
-        中的 Galgame 制作商部分 进行正版 Galgame 补票, 感谢您对 Galgame
-        业界做出的贡献
-      </p>
     </KunInfo>
 
     <KunInfo title="鲲的小请求">

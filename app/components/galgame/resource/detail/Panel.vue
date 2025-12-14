@@ -65,7 +65,11 @@ const galgameTitle = getPreferredLanguageText(props.galgame.name)
       </KunBadge>
       <KunBadge color="default">
         <KunIcon name="lucide:download" />
-        {{ `${resource.download} 次下载` }}
+        {{ resource.download }}
+      </KunBadge>
+      <KunBadge color="default">
+        <KunIcon name="lucide:eye" />
+        {{ resource.view }}
       </KunBadge>
     </div>
 

@@ -70,6 +70,7 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
       useMessage(10550, 'success')
     }
     resourceLink.value = defaultResourceLink
+    emits('refresh')
     emits('close')
   }
 }
@@ -78,6 +79,7 @@ const handleCancel = () => {
   rewriteResourceId.value = 0
   resourceLink.value = defaultResourceLink
   resource.value = resourceLink.value
+  emits('close')
 }
 
 watch(

@@ -60,6 +60,7 @@ export default defineEventHandler(async (event) => {
 
   const resources: GalgameResourceCard[] = data.map((resource) => ({
     id: resource.id,
+    view: resource.view,
     galgameId: resource.galgame_id,
     user: resource.user,
     type: resource.type,
@@ -69,6 +70,7 @@ export default defineEventHandler(async (event) => {
     status: resource.status,
     likeCount: resource._count.like,
     isLiked: resource.like.length > 0,
+    edited: resource.edited,
     created: resource.created,
     linkDomain: '',
     download: resource.download,

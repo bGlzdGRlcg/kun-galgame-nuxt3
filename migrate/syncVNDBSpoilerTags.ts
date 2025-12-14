@@ -1,5 +1,5 @@
-import { prisma } from '../prisma/prisma'
 import { TAG_MAP } from '../lib/tagMap'
+import { prisma } from '../prisma/prisma'
 
 const VNDB_API_BASE = 'https://api.vndb.org/kana'
 const BATCH_SIZE = 100
@@ -120,7 +120,7 @@ async function main() {
 
       const data = await response.json()
       const vns = data.results
-      const updatePromises = []
+      const updatePromises: Promise<unknown>[] = []
 
       for (const vn of vns) {
         const localGameId = vndbIdToGameIdMap.get(vn.id)

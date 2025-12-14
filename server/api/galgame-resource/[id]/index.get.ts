@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
 
   await prisma.galgame_resource.update({
     where: { id: input.resourceId },
-    data: { download: { increment: 1 } }
+    data: { view: { increment: 1 } }
   })
 
   const linkDomain = [

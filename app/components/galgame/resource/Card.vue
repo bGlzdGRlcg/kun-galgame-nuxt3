@@ -47,7 +47,7 @@ defineProps<{
         {{ getPreferredLanguageText(resource.galgameName) }}
       </h3>
 
-      <div class="flex items-center justify-between">
+      <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="text-default-700 flex gap-4 text-sm">
           <span class="flex items-center gap-1">
             <KunIcon
@@ -60,9 +60,15 @@ defineProps<{
           {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[resource.language] }}
         </div>
 
-        <div class="text-default-500 flex items-center gap-1 text-sm">
-          <KunIcon name="lucide:download" class="h-4 w-4" />
-          {{ resource.download }}
+        <div class="flex gap-2">
+          <div class="text-default-500 flex items-center gap-1 text-sm">
+            <KunIcon name="lucide:download" class="h-4 w-4" />
+            {{ resource.download }}
+          </div>
+          <div class="text-default-500 flex items-center gap-1 text-sm">
+            <KunIcon name="lucide:eye" class="h-4 w-4" />
+            {{ resource.view }}
+          </div>
         </div>
       </div>
     </div>
