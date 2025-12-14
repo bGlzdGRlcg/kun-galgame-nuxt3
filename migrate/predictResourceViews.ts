@@ -10,11 +10,11 @@ function predictResourceView(params: {
 }) {
   const now = new Date()
 
+  const DAY = 1000 * 60 * 60 * 24
   const gameActiveDays = Math.max(
     (now.getTime() - params.gameCreated.getTime()) / DAY,
     1
   )
-
   const resourceActiveDays = Math.max(
     (now.getTime() - params.resourceCreated.getTime()) / DAY,
     1
@@ -37,14 +37,13 @@ function predictResourceView(params: {
     rawView = gameViewRate * resourceActiveDays * 0.1
   }
 
-  const finalView = Math.floor(
-    Math.min(
-      params.gameView * MAX_RATIO,
-      Math.max(rawView, params.resourceDownload)
-    )
-  )
+  let finalView = Math.min(params.gameView * MAX_RATIO, rawView)
 
-  return finalView
+  finalView = Math.max(finalView, params.resourceDownload)
+
+  finalView = Math.min(finalView, Math.max(params.gameView, finalView))
+
+  return Math.floor(finalView)
 }
 
 async function main() {
@@ -62,7 +61,7 @@ async function main() {
     if (game.view <= 0) continue
 
     for (const res of game.resource) {
-      if (res.view) continue
+      // if (res.view) continue
 
       const view = predictResourceView({
         gameView: game.view,
