@@ -15,10 +15,11 @@ model user {
     daily_toolset_upload_count Int    @default(0)
 
     // SU only
-    todo       todo[]
-    update_log update_log[]
-    website    galgame_website[]
-    unmoe      unmoe[]
+    todo        todo[]
+    update_log  update_log[]
+    website     galgame_website[]
+    unmoe       unmoe[]
+    doc_article doc_article[]
 
     system_message  system_message[] @relation("system_message_sender")
     send_message    message[]        @relation("user_send_message")
