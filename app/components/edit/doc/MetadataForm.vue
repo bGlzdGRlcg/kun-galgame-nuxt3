@@ -126,18 +126,6 @@ const handleCreateTag = async () => {
         @blur="normalizeSlug"
       />
 
-      <div
-        class="border-default-200 flex flex-wrap items-center justify-between gap-3 rounded-lg border px-4 py-2"
-      >
-        <div>
-          <p class="text-sm font-medium">访问路径</p>
-          <p class="text-default-500 text-xs">系统会自动固定为 /doc/[slug]</p>
-        </div>
-        <span class="text-primary font-semibold">
-          /doc/{{ form.slug || '...' }}
-        </span>
-      </div>
-
       <KunInput
         v-model="form.banner"
         label="封面地址"

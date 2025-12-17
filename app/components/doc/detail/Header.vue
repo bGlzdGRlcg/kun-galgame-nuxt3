@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { kungalgameResponseHandler } from '~/utils/responseHandler'
 
@@ -7,8 +6,7 @@ const props = defineProps<{
 }>()
 
 const metadata = computed(() => props.metadata)
-const { role } = storeToRefs(usePersistUserStore())
-const canManageDoc = computed(() => role.value > 2)
+const { role } = usePersistUserStore()
 const isDeleting = ref(false)
 
 const handleEdit = async () => {
@@ -53,10 +51,10 @@ const handleDelete = async () => {
 
 <template>
   <KunCard :is-hoverable="false" class-name="border-none">
-    <div class="relative mb-6 w-full overflow-hidden rounded-lg">
+    <div class="relative mb-6 aspect-video h-full w-full">
       <KunImage
         :alt="metadata.title"
-        class="object-cover"
+        class="size-full rounded-lg object-cover"
         :src="metadata.banner || '/kungalgame.webp'"
         width="100%"
         height="100%"
@@ -73,18 +71,15 @@ const handleDelete = async () => {
         <KunBadge color="secondary">
           {{ metadata.category.title }}
         </KunBadge>
-        <div class="flex items-center gap-1 text-default-500">
+        <div class="text-default-500 flex items-center gap-1">
           <KunIcon name="lucide:eye" class="h-4 w-4" />
           <span>{{ metadata.view }} 次浏览</span>
         </div>
 
-        <div
-          v-if="canManageDoc"
-          class="flex flex-wrap items-center gap-2"
-        >
+        <div v-if="role > 2" class="flex flex-wrap items-center gap-2">
           <KunButton
             size="sm"
-            variant="light"
+            variant="flat"
             color="primary"
             @click="handleEdit"
           >
@@ -92,7 +87,7 @@ const handleDelete = async () => {
           </KunButton>
           <KunButton
             size="sm"
-            variant="light"
+            variant="flat"
             color="danger"
             :loading="isDeleting"
             :disabled="isDeleting"
