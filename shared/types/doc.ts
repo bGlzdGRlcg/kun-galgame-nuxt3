@@ -60,7 +60,6 @@ export interface DocArticleSummary {
   banner: string
   status: number
   isPin: boolean
-  readingMinute: number
   view: number
   publishedTime: Date | string
   editedTime: Date | string | null

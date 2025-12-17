@@ -47,18 +47,17 @@ export default defineEventHandler(async (event) => {
   }
 
   const updatedArticle = await prisma.$transaction(async (tx) => {
+    const docPath = `/doc/${input.slug}`
     await tx.doc_article.update({
       where: { id: input.articleId },
       data: {
         title: input.title,
         slug: input.slug,
-        path: input.path,
+        path: docPath,
         description: input.description,
         banner: input.banner,
         status: input.status,
         is_pin: input.isPin,
-        reading_minute: input.readingMinute,
-        published_time: input.publishedTime ?? undefined,
         edited_time: new Date(),
         content_markdown: input.contentMarkdown,
         category_id: input.categoryId

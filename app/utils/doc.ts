@@ -26,3 +26,12 @@ export const computeReadingMinute = (markdown: string) => {
 
   return Math.max(1, Math.ceil(tokens.length / WORDS_PER_MINUTE))
 }
+
+export const normalizeDocSlug = (value: string) =>
+  value
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')

@@ -54,14 +54,6 @@ const normalizeDate = (value: unknown, fallback = new Date()) => {
   return fallback
 }
 
-const computeReadingMinute = (markdown: string) => {
-  const text = markdown.replace(/`{3}[\s\S]*?`{3}/g, '').replace(/`[^`]+`/g, '')
-  const words = text.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean)
-  const count = words.length
-  const wordsPerMinute = 300
-  return Math.max(1, Math.ceil(count / wordsPerMinute))
-}
-
 const parseDocFile = (filePath: string) => {
   const raw = fs.readFileSync(filePath, 'utf-8')
   const parsed = matter(raw)
@@ -190,10 +182,7 @@ const migrateFile = async (filePath: string) => {
   const slug =
     normalizeSlug(meta.slug) ||
     normalizeSlug(path.basename(filePath, path.extname(filePath)))
-  const docPath =
-    typeof meta.path === 'string' && meta.path.trim().length
-      ? meta.path
-      : `/doc/${slug}`
+  const docPath = `/doc/${slug}`
 
   const categorySlug = normalizeSlug(meta.category || 'other') || 'other'
   const categoryTitle =
@@ -213,8 +202,6 @@ const migrateFile = async (filePath: string) => {
   const authorId = await resolveAuthor(meta)
 
   const markdown = content
-  const readingMinute = computeReadingMinute(markdown)
-
   const publishedTime = normalizeDate(meta.publishedTime, new Date())
   const modifiedTime = meta.modifiedTime
     ? normalizeDate(meta.modifiedTime, new Date())
@@ -228,7 +215,6 @@ const migrateFile = async (filePath: string) => {
     banner: (meta.banner as string) || '',
     status: normalizeNumber(meta.status, meta.draft ? 0 : 1),
     is_pin: normalizeBoolean(meta.pin, false),
-    reading_minute: readingMinute,
     view: normalizeNumber(meta.view, 0),
     published_time: publishedTime,
     edited_time: modifiedTime,

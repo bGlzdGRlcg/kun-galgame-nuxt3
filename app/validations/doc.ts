@@ -8,12 +8,6 @@ const slugSchema = z
   .regex(/^[a-z0-9-]+$/i, 'slug 仅能包含字母、数字与连接符')
   .transform((value) => value.toLowerCase())
 
-const pathSchema = z
-  .string()
-  .trim()
-  .min(1, '访问路径不能为空')
-  .max(255, '访问路径过长')
-
 const optionalString = (max: number, defaultValue = '') =>
   z.string().trim().max(max).optional().default(defaultValue)
 
@@ -93,7 +87,6 @@ const docArticleBaseSchema = z.object({
     .min(1, '文档标题不能为空')
     .max(233, '标题最长 233 个字符'),
   slug: slugSchema,
-  path: pathSchema,
   description: z
     .string()
     .trim()
@@ -102,7 +95,6 @@ const docArticleBaseSchema = z.object({
   banner: optionalString(777),
   status: z.coerce.number<number>().int().min(0).max(2).default(1),
   isPin: z.coerce.boolean().default(false),
-  readingMinute: z.coerce.number<number>().int().min(0).max(999999).default(0),
   contentMarkdown: z
     .string()
     .trim()
@@ -112,8 +104,7 @@ const docArticleBaseSchema = z.object({
   tagIds: z
     .array(z.coerce.number<number>().min(1).max(9999999))
     .optional()
-    .default([]),
-  publishedTime: z.coerce.date().optional()
+    .default([])
 })
 
 export const createDocArticleSchema = docArticleBaseSchema

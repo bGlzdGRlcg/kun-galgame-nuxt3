@@ -34,7 +34,6 @@ model doc_article {
     // 0 - draft, 1 - published, 2 - archived
     status         Int       @default(1)
     is_pin         Boolean   @default(false)
-    reading_minute Int       @default(0)
     view           Int       @default(0)
     published_time DateTime  @default(now())
     edited_time    DateTime?

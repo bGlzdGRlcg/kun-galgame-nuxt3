@@ -61,12 +61,10 @@ const createDefaultForm = (): DocEditorForm => ({
   articleId: null,
   title: '',
   slug: '',
-  path: '',
   description: '',
   banner: '',
   status: 1,
   isPin: false,
-  readingMinute: 0,
   contentMarkdown: '',
   categoryId: 0,
   tagIds: []
@@ -74,18 +72,18 @@ const createDefaultForm = (): DocEditorForm => ({
 
 const form = reactive<DocEditorForm>(createDefaultForm())
 const isSubmitting = ref(false)
-const isPathCustomized = ref(false)
+const readingMinute = computed(() =>
+  form.contentMarkdown.trim() ? computeReadingMinute(form.contentMarkdown) : 0
+)
 
 const applyArticleToForm = (article: DocArticleDetail) => {
   form.articleId = article.id
   form.title = article.title
   form.slug = article.slug
-  form.path = article.path
   form.description = article.description
   form.banner = article.banner || ''
   form.status = article.status
   form.isPin = article.isPin
-  form.readingMinute = article.readingMinute
   form.contentMarkdown = article.contentMarkdown
   form.categoryId = article.category.id
   form.tagIds = article.tags.map((tag) => tag.id)
@@ -94,17 +92,14 @@ const applyArticleToForm = (article: DocArticleDetail) => {
 const resetForm = () => {
   if (isRewriteMode.value && props.initialArticle) {
     applyArticleToForm(props.initialArticle)
-    isPathCustomized.value = true
     return
   }
 
   Object.assign(form, createDefaultForm())
-  isPathCustomized.value = false
 }
 
 if (isRewriteMode.value && props.initialArticle) {
   applyArticleToForm(props.initialArticle)
-  isPathCustomized.value = true
 }
 
 watch(
@@ -112,39 +107,8 @@ watch(
   (article) => {
     if (isRewriteMode.value && article) {
       applyArticleToForm(article)
-      isPathCustomized.value = true
     }
   }
-)
-
-watch(
-  () => form.slug,
-  (slug) => {
-    if (isRewriteMode.value || isPathCustomized.value) {
-      return
-    }
-    form.path = slug ? `/doc/${slug}` : ''
-  }
-)
-
-watch(
-  () => form.path,
-  (value) => {
-    if (isRewriteMode.value) {
-      return
-    }
-    if (!value) {
-      isPathCustomized.value = false
-    }
-  }
-)
-
-watch(
-  () => form.contentMarkdown,
-  (markdown) => {
-    form.readingMinute = markdown.trim() ? computeReadingMinute(markdown) : 0
-  },
-  { immediate: true }
 )
 
 const validateForm = () => {
@@ -153,9 +117,6 @@ const validateForm = () => {
   }
   if (!form.slug.trim()) {
     return '请输入 slug'
-  }
-  if (!form.path.trim()) {
-    return '请输入访问路径'
   }
   if (!form.description.trim()) {
     return '请输入简介'
@@ -187,17 +148,16 @@ const handleSubmit = async () => {
 
   isSubmitting.value = true
   try {
+    const normalizedSlug = form.slug.trim()
     const body: Record<string, unknown> = {
       title: form.title.trim(),
-      slug: form.slug.trim(),
-      path: form.path.trim(),
+      slug: normalizedSlug,
       description: form.description.trim(),
       banner: form.banner.trim(),
       status: form.status,
       isPin: form.isPin,
-      readingMinute: form.readingMinute,
       contentMarkdown: form.contentMarkdown,
-      categoryId: form.categoryId,
+      categoryId: form.categoryId as number,
       tagIds: Array.from(new Set(form.tagIds))
     }
 
@@ -217,17 +177,10 @@ const handleSubmit = async () => {
         'success'
       )
       applyArticleToForm(result)
-      isPathCustomized.value = true
       await navigateTo(result.path)
     }
   } finally {
     isSubmitting.value = false
-  }
-}
-
-const markPathCustomized = () => {
-  if (!isRewriteMode.value) {
-    isPathCustomized.value = true
   }
 }
 
@@ -243,8 +196,8 @@ provideDocEditorContext({
   isSubmitting,
   handleSubmit,
   resetForm,
-  markPathCustomized,
-  refreshTags
+  refreshTags,
+  readingMinute
 })
 </script>
 

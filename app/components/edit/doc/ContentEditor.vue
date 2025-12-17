@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDocEditorContext } from './context'
 
-const { form } = useDocEditorContext()
+const { form, readingMinute } = useDocEditorContext()
 </script>
 
 <template>
@@ -10,13 +10,13 @@ const { form } = useDocEditorContext()
       <div>
         <h3 class="text-lg font-semibold">正文内容</h3>
         <p class="text-default-500 text-sm">
-          使用 Markdown 撰写文档，系统会自动转换为 HTML 并生成目录
+          使用 Markdown 撰写文档，系统会自动渲染为 HTML 并生成目录。
         </p>
       </div>
       <div class="text-default-500 text-sm">
         预计阅读时长：
         <span class="text-primary font-semibold">
-          {{ form.readingMinute || 0 }} 分钟
+          {{ readingMinute }} 分钟
         </span>
       </div>
     </div>
@@ -38,3 +38,4 @@ const { form } = useDocEditorContext()
     </KunMilkdownDualEditorProvider>
   </div>
 </template>
+

@@ -1,5 +1,5 @@
 import { inject, provide } from 'vue'
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { DocEditorForm, DocEditorMode } from './type'
 
 export interface DocEditorContext {
@@ -10,8 +10,8 @@ export interface DocEditorContext {
   isSubmitting: Ref<boolean>
   handleSubmit: () => Promise<void>
   resetForm: () => void
-  markPathCustomized: () => void
   refreshTags: () => Promise<void>
+  readingMinute: ComputedRef<number>
 }
 
 const docEditorContextKey = Symbol('DocEditorContext')

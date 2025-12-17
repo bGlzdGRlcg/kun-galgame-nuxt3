@@ -2,9 +2,10 @@
 import { KUN_DOC_CATEGORY_MAP, KUN_DOC_STATUS_OPTIONS } from '~/constants/doc'
 import { useDocEditorContext } from './context'
 import { normalizeDocSlug } from '~/utils/doc'
+import { kungalgameResponseHandler } from '~/utils/responseHandler'
 import type { KunSelectOption } from '~/components/kun/select/type'
 
-const { form, categories, tags, markPathCustomized, refreshTags } =
+const { form, categories, tags, refreshTags, readingMinute } =
   useDocEditorContext()
 
 const categoryOptions = computed<KunSelectOption[]>(() =>
@@ -31,10 +32,6 @@ const toggleTag = (tagId: number) => {
   } else {
     form.tagIds = Array.from(new Set([...form.tagIds, tagId]))
   }
-}
-
-const handlePathInput = () => {
-  markPathCustomized()
 }
 
 const normalizeSlug = () => {
@@ -72,13 +69,13 @@ const handleCreateTag = async () => {
 
   const title = newTagTitle.value.trim()
   if (!title) {
-    useMessage('Please enter a tag title', 'warn')
+    useMessage('请输入标签名称', 'warn')
     return
   }
 
   const slug = normalizeDocSlug(newTagSlug.value || title)
   if (!slug) {
-    useMessage('Please enter a valid tag slug', 'warn')
+    useMessage('请输入合法的标签 Slug', 'warn')
     return
   }
 
@@ -100,7 +97,7 @@ const handleCreateTag = async () => {
         ...tags.value.filter((tag) => tag.id !== created.id)
       ]
       form.tagIds = Array.from(new Set([...form.tagIds, created.id]))
-      useMessage('Tag created', 'success')
+      useMessage('创建标签成功', 'success')
       resetNewTagForm()
       await refreshTags()
     }
@@ -113,10 +110,9 @@ const handleCreateTag = async () => {
 <template>
   <div class="space-y-6">
     <div>
-      <h3 class="text-lg font-semibold">Basic Metadata</h3>
+      <h3 class="text-lg font-semibold">基础信息</h3>
       <p class="text-default-500 text-sm">
-        Configure slug, path, banner, and description. Publish/update timestamps
-        are managed automatically.
+        slug 会自动拼接为 /doc/[slug] 作为访问路径，无需手动填写。
       </p>
     </div>
 
@@ -124,32 +120,35 @@ const handleCreateTag = async () => {
       <KunInput
         v-model="form.slug"
         label="Slug"
-        placeholder="unique-doc-slug"
+        placeholder="请输入唯一的文档 slug"
         maxlength="233"
         required
         @blur="normalizeSlug"
       />
 
-      <KunInput
-        v-model="form.path"
-        label="Permalink"
-        placeholder="/doc/awesome-article"
-        maxlength="255"
-        required
-        @update:model-value="handlePathInput"
-      />
+      <div
+        class="border-default-200 flex flex-wrap items-center justify-between gap-3 rounded-lg border px-4 py-2"
+      >
+        <div>
+          <p class="text-sm font-medium">访问路径</p>
+          <p class="text-default-500 text-xs">系统会自动固定为 /doc/[slug]</p>
+        </div>
+        <span class="text-primary font-semibold">
+          /doc/{{ form.slug || '...' }}
+        </span>
+      </div>
 
       <KunInput
         v-model="form.banner"
-        label="Banner URL"
+        label="封面地址"
         placeholder="https://example.com/banner.webp"
         maxlength="777"
       />
 
       <KunTextarea
         v-model="form.description"
-        label="Summary"
-        placeholder="Short introduction for this document"
+        label="文档简介"
+        placeholder="请输入用于展示的简介"
         :rows="4"
         auto-grow
         :maxlength="777"
@@ -162,51 +161,48 @@ const handleCreateTag = async () => {
       <KunSelect
         v-model="form.categoryId"
         :options="categoryOptions"
-        label="Category"
-        placeholder="Select a category"
+        label="文档分类"
+        placeholder="请选择分类"
       />
 
       <KunSelect
         v-model="form.status"
         :options="statusOptions"
-        label="Status"
-        placeholder="Select a status"
+        label="发布状态"
+        placeholder="请选择状态"
       />
 
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <KunInput
-          v-model="form.readingMinute"
-          label="Estimated Reading (min)"
-          type="number"
-          min="0"
-          readonly
-          helper-text="Automatically calculated from content"
-        />
-
-        <div
-          class="border-default-200 flex items-center justify-between rounded-lg border px-4 py-2"
-        >
-          <div>
-            <p class="text-sm font-medium">Pinned</p>
-            <p class="text-default-500 text-xs">
-              Also display inside the homepage hero carousel
-            </p>
-          </div>
-          <KunSwitch v-model="form.isPin" color="primary" />
+      <div
+        class="border-default-200 flex flex-wrap items-center justify-between gap-3 rounded-lg border px-4 py-2"
+      >
+        <div>
+          <p class="text-sm font-medium">预计阅读时长</p>
+          <p class="text-default-500 text-xs">根据当前正文实时计算</p>
         </div>
+        <span class="text-primary font-semibold">
+          {{ readingMinute }} 分钟
+        </span>
+      </div>
+
+      <div
+        class="border-default-200 flex items-center justify-between rounded-lg border px-4 py-2"
+      >
+        <div>
+          <p class="text-sm font-medium">首页置顶</p>
+          <p class="text-default-500 text-xs">开启后会在首页轮播中固定展示</p>
+        </div>
+        <KunSwitch v-model="form.isPin" color="primary" />
       </div>
     </div>
 
     <div class="space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h4 class="font-semibold">Tags</h4>
-          <p class="text-default-500 text-xs">
-            Click any tag to toggle selection.
-          </p>
+          <h4 class="font-semibold">文档标签</h4>
+          <p class="text-default-500 text-xs">点击任意标签即可切换选中状态。</p>
         </div>
         <KunBadge color="secondary" variant="flat">
-          {{ tags.length }} tags available
+          共 {{ tags.length }} 个标签
         </KunBadge>
       </div>
 
@@ -229,10 +225,10 @@ const handleCreateTag = async () => {
       </div>
 
       <div
-        class="text-default-500 grid grid-cols-1 gap-2 text-sm"
         v-if="form.tagIds.length"
+        class="text-default-500 grid grid-cols-1 gap-2 text-sm"
       >
-        <span>Selected tags:</span>
+        <span>已选择：</span>
         <div class="flex flex-wrap gap-2">
           <KunBadge
             v-for="tagId in form.tagIds"
@@ -240,36 +236,38 @@ const handleCreateTag = async () => {
             color="secondary"
             variant="flat"
           >
-            {{ tags.find((tag) => tag.id === tagId)?.title || `#${tagId}` }}
+            {{
+              tags.find((tag) => tag.id === tagId)?.title || `标签 #${tagId}`
+            }}
           </KunBadge>
         </div>
       </div>
 
       <div class="border-default-200 space-y-3 rounded-lg border p-4">
         <div>
-          <h5 class="text-sm font-semibold">Create Tag</h5>
+          <h5 class="text-sm font-semibold">创建新标签</h5>
           <p class="text-default-500 text-xs">
-            Add new documentation tags without leaving this page.
+            无需离开当前页面即可补充缺失的标签，方便后续复用。
           </p>
         </div>
         <KunInput
           v-model="newTagTitle"
-          label="Title"
-          placeholder="Tag title"
+          label="标签名称"
+          placeholder="请输入标签名称"
           maxlength="128"
           required
         />
         <KunInput
           v-model="newTagSlug"
-          label="Slug"
-          placeholder="tag-slug"
+          label="标签 Slug"
+          placeholder="请输入标签 slug"
           maxlength="233"
           @input="handleSlugInput"
         />
         <KunTextarea
           v-model="newTagDescription"
-          label="Description"
-          placeholder="Optional note"
+          label="标签描述"
+          placeholder="可选补充说明"
           :rows="2"
           :maxlength="255"
           auto-grow
@@ -280,7 +278,7 @@ const handleCreateTag = async () => {
           :disabled="isCreatingTag"
           @click="handleCreateTag"
         >
-          Create Tag
+          创建标签
         </KunButton>
       </div>
     </div>

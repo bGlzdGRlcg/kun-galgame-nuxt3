@@ -39,17 +39,16 @@ export default defineEventHandler(async (event) => {
   }
 
   const article = await prisma.$transaction(async (tx) => {
+    const docPath = `/doc/${input.slug}`
     const createdArticle = await tx.doc_article.create({
       data: {
         title: input.title,
         slug: input.slug,
-        path: input.path,
+        path: docPath,
         description: input.description,
         banner: input.banner,
         status: input.status,
         is_pin: input.isPin,
-        reading_minute: input.readingMinute,
-        published_time: input.publishedTime ?? new Date(),
         content_markdown: input.contentMarkdown,
         category_id: input.categoryId,
         author_id: userInfo.uid
