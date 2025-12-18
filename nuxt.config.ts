@@ -95,17 +95,6 @@ export default defineNuxtConfig({
     }
   },
 
-  content: {
-    build: {
-      markdown: {
-        toc: {
-          depth: 3,
-          searchDepth: 3
-        }
-      }
-    }
-  },
-
   typescript: {
     tsConfig: {
       ...sharedTsConfig
@@ -166,43 +155,6 @@ export default defineNuxtConfig({
     classPrefix: 'kun-',
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode'
-  },
-
-  // Backend
-  pwa: {
-    registerType: 'autoUpdate',
-    // Disable pwa in development environment
-    disable: process.env.NODE_ENV === 'development',
-    manifest: {
-      name: 'KUN Visual Novel',
-      short_name: 'KunGal',
-      theme_color: '#218bff',
-      icons: [
-        {
-          src: 'pwa/pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable'
-        }
-      ]
-    },
-    workbox: {
-      globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
-      navigateFallback: null
-    },
-    client: {
-      installPrompt: true
-    }
   },
 
   nitro: {

@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt4",
-  "version": "5.0.54",
+  "version": "5.0.55",
   "type": "module",
   "packageManager": "pnpm@10.17.1",
   "private": true,
@@ -44,7 +44,6 @@
     "@types/nodemailer": "^7.0.4",
     "@types/nodemailer-smtp-transport": "^2.7.8",
     "@types/pg": "^8.15.6",
-    "@vite-pwa/nuxt": "^1.1.0",
     "eslint": "^9.39.1",
     "esno": "^4.8.0",
     "gray-matter": "^4.0.3",

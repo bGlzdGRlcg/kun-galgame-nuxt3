@@ -136,7 +136,6 @@ onMounted(() => {
 
     <LazyKunSettingPanel />
 
-    <NuxtPwaManifest />
     <NuxtLoadingIndicator color="var(--color-primary)" />
 
     <NuxtLayout>
