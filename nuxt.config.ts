@@ -19,7 +19,11 @@ export default defineNuxtConfig({
 
   app: {
     pageTransition: { name: 'kun-page', mode: 'out-in' },
-    layoutTransition: { name: 'kun-page', mode: 'out-in' }
+    layoutTransition: { name: 'kun-page', mode: 'out-in' },
+
+    // https://github.com/nuxt/nuxt/issues/26565#issuecomment-3448517709
+    baseURL: '/',
+    buildAssetsDir: `/_nuxt/v${Math.floor(Date.now() / 1000).toString()}/`
   },
 
   experimental: {
