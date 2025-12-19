@@ -3,7 +3,8 @@ import {
   topicSortItem,
   galgameSortItem,
   userSortItem,
-  rankingPageTabs
+  rankingPageTabs,
+  rankingPageMetaData
 } from '~/constants/ranking'
 import {
   topicRankingPageData,
@@ -41,7 +42,10 @@ const sortOptions = computed(() => {
     content-class="space-y-3"
   >
     <div class="space-y-3">
-      <h1 class="text-2xl font-bold sm:text-3xl">排行榜单</h1>
+      <KunHeader
+        :name="rankingPageMetaData[activeTab]!.title"
+        :description="rankingPageMetaData[activeTab]!.description"
+      />
 
       <div class="flex items-center justify-between">
         <KunTab

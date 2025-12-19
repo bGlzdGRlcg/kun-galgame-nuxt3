@@ -25,7 +25,7 @@ const headingClass = computed(() => {
   <div class="space-y-2">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div class="space-y-2">
-        <component :is="scale" :class="headingClass">
+        <component :title="name" :is="scale" :class="headingClass">
           <span v-if="name">{{ name }}</span>
           <slot name="title" />
         </component>

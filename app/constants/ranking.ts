@@ -189,3 +189,27 @@ export const rankingPageTabs: KunTabItem[] = [
     href: '/ranking/user'
   }
 ]
+
+export const rankingPageMetaData: Record<
+  string,
+  {
+    title: string
+    description: string
+  }
+> = {
+  topic: {
+    title: '话题排行',
+    description:
+      '查看关于 Galgame 话题的浏览数, 点赞数, 回复数, 评论数排行, 浏览最多人关注的 Galgame 话题'
+  },
+  galgame: {
+    title: 'Galgame 排行',
+    description:
+      '最强大的 Galgame 排行, 根据本站所有用户的历史数据综合得出, 具有良好的参考价值。适合用于 Galgame, Galgame 资源, Galgame 交流'
+  },
+  user: {
+    title: '用户排行',
+    description:
+      '用户排行, 查看最强大的 Galgamer, 查看发布 Galgame 资源最多的用户, 查看 Galgamer 相关的动态, Galgame, Galgame 资源与话题'
+  }
+}
