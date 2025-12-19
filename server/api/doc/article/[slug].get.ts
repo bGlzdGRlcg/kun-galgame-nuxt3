@@ -14,10 +14,14 @@ export default defineEventHandler(async (event) => {
     where: { slug: articleSlug },
     select: docArticleDetailSelect
   })
-
   if (!article) {
     return kunError(event, '文档不存在')
   }
+
+  await prisma.doc_article.update({
+    where: { slug: articleSlug },
+    data: { view: { increment: 1 } }
+  })
 
   const result: DocArticleDetail = await mapDocArticleDetail(article)
   return result

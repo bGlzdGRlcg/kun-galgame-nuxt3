@@ -6,7 +6,7 @@ const { data: pinnedResponse } = await useFetch('/api/doc/article', {
     page: 1,
     limit: 10,
     isPin: true,
-    orderBy: 'published_time',
+    orderBy: 'view',
     sortOrder: 'desc'
   }
 })
