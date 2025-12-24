@@ -11,6 +11,8 @@ const { showKUNGalgameSidebarCollapsed } = storeToRefs(
   usePersistSettingsStore()
 )
 
+const { isSnowing, toggleSnow, startSnow } = useKunSnowEffect()
+
 const router = useRouter()
 const canGoBack = ref(false)
 // const isShowUpdateAvatarModal = ref(false)
@@ -42,6 +44,8 @@ onMounted(async () => {
   // }
 
   updateCanGoBack()
+
+  startSnow()
 
   router.afterEach(() => {
     updateCanGoBack()

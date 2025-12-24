@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import {
+  ENABLE_KUN_VISUAL_NOVEL_FORUM_WINTER_THEME,
+  KUN_VISUAL_NOVEL_FORUM_WINTER_THEME_BACKGROUND
+} from '~/config/theme'
 import type { KUNGalgameSettingsStore } from '../types/settings'
 
 const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME: string = 'kun-galgame-custom-bg'
@@ -76,7 +80,9 @@ export const usePersistSettingsStore = defineStore(
         SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME
       )
       if (showKUNGalgameBackground.value === 0) {
-        return ''
+        return ENABLE_KUN_VISUAL_NOVEL_FORUM_WINTER_THEME
+          ? KUN_VISUAL_NOVEL_FORUM_WINTER_THEME_BACKGROUND
+          : ''
       }
 
       if (showKUNGalgameBackground.value === -1 && backgroundImageBlobData) {

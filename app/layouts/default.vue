@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import {
+  ENABLE_KUN_VISUAL_NOVEL_FORUM_WINTER_THEME,
+  KUN_VISUAL_NOVEL_FORUM_WINTER_THEME_BACKGROUND
+} from '~/config/theme'
+
 const { showKUNGalgameBackground, showKUNGalgameBackLoli } = storeToRefs(
   usePersistSettingsStore()
 )
 
-const imageURL = ref('')
+const imageURL = ref(
+  ENABLE_KUN_VISUAL_NOVEL_FORUM_WINTER_THEME
+    ? KUN_VISUAL_NOVEL_FORUM_WINTER_THEME_BACKGROUND
+    : ''
+)
 
 onMounted(async () => {
   imageURL.value = await usePersistSettingsStore().getCurrentBackground()
@@ -49,10 +58,14 @@ const { showKUNGalgameSidebarCollapsed } = storeToRefs(
           <NuxtPage />
         </div>
 
-        <NuxtImg
+        <KunImage
           v-if="showKUNGalgameBackLoli"
-          class="pointer-events-none fixed right-px bottom-px z-0 opacity-17 select-none"
-          src="/image/kohaku.webp"
+          class="pointer-events-none fixed right-px bottom-px z-0 min-w-60 opacity-17! select-none"
+          :src="
+            ENABLE_KUN_VISUAL_NOVEL_FORUM_WINTER_THEME
+              ? '/winter/sd.webp'
+              : '/image/kohaku.webp'
+          "
           loading="lazy"
           alt="kohaku"
         />
